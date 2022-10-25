@@ -1,3 +1,3 @@
-public class SolderingGame extends MiniGame {
+public class SolderingGame {
 
 }

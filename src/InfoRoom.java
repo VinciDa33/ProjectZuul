@@ -12,7 +12,7 @@ public class InfoRoom extends Room{
 
         String options = "";
         for (String key : exits.keySet()) {
-            options += " : " + key;
+            options += key + " : ";
         }
         System.out.println(options);
         System.out.println("What do you want to do?.\n>");
