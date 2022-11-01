@@ -1,15 +1,19 @@
 public class GameManager {
     private InputManager input;
     private Room activeRoom;
-    private boolean isPlaying;
+    private boolean isPlaying = false;
+
     GameManager(){
         input = new InputManager();
     }
 
     public void play(){
-        if(isPlaying == true)
+        if(isPlaying)
             return;
-        while(true){
+
+        isPlaying = true;
+
+        while(isPlaying){
             activeRoom.update();
         }
     }
@@ -19,5 +23,9 @@ public class GameManager {
     public void goToRoom(Room room){
         this.activeRoom = room;
         activeRoom.onEnterRoom();
+    }
+
+    public void quitGame() {
+        isPlaying = false;
     }
 }

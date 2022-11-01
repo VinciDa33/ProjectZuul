@@ -1,4 +1,4 @@
-public class InfoRoom extends Abstract Room{
+public class InfoRoom extends Room{
     String description;
 
     @Override
@@ -17,7 +17,10 @@ public class InfoRoom extends Abstract Room{
                 return;
             }
         }
-        System.out.println("Unkown error!");
+        if (userInput.equals("Quit"))
+            gm.quitGame();
+
+        System.out.println("Unknown input!");
 
 
     }

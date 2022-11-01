@@ -1,8 +1,8 @@
 import java.util.HashMap;
 
 public abstract class Room {
-    private InputManager input;
-    private Gamemanager gm;
+    InputManager input;
+    GameManager gm;
     HashMap<String, Room> exits = new HashMap<String, Room>();
 
     public void setExit(String key, Room room){

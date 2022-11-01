@@ -20,6 +20,3 @@ public class InputManager {
         return reader.nextDouble();
     }
 }
-//Array og Arraylisten er to anderledes ting. Engang, hvor Array er oprettet, kan den ikke ændre mængden af pladserne eller array.længden.
-//Hvorimod hvis Arraylisten kan ændre sit liste.
-//Begge ting er to forskellige ting, med forskellige funktion men med samme hensigt.
