@@ -8,4 +8,8 @@ public class PointScore {
     public static int getPoints(){
         return points;
     }
+
+    public static void printScore(){
+        System.out.println(points);
+    }
 }

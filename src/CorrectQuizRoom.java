@@ -4,23 +4,10 @@ import java.util.ArrayList;
 public class CorrectQuizRoom extends QuizRoom{
     private ArrayList<Boolean> correct = new ArrayList<>();
 
-    CorrectQuizRoom(String q, GameManager gm, InputManager im){
-        question = q;
+    CorrectQuizRoom(String question, GameManager gm, InputManager im){
+        this.question = question;
         this.gm = gm;
         this.input = im;
-    }
-
-    @Override
-    public void onEnterRoom() {
-        System.out.println("---------- Question ----------");
-        System.out.println(question);
-        System.out.println("\n---------- oooooooo ----------\n");
-
-        //Prints every answer option for the user
-        for (int i = 0; i < answers.size(); i++) {
-            System.out.println("[" + (i+1) + "]: " + answers.get(i));
-        }
-        System.out.println("Write the number of the answer you wish to choose.");
     }
 
     public void addAnswer(String answer, String response, boolean isCorrect){
@@ -44,28 +31,5 @@ public class CorrectQuizRoom extends QuizRoom{
             System.out.println(responses.get(answer-1));
         }
         questionAnswered = true;
-    }
-
-    @Override
-    public void update() {
-        if (questionAnswered && (questionCorrect || skipOnAnswer)){
-            OptionPrinter.printHashmapOptions(exits);
-
-            String userInput = input.getNextLine();
-            for (String key : exits.keySet()) {
-                if (userInput.equals(key)){
-                    gm.goToRoom(exits.get(userInput));
-                    return;
-                }
-            }
-            if (userInput.equals("Quit")) {
-                gm.quitGame();
-                return;
-            }
-            System.out.println("Unknown input!");
-        }
-        else{
-            answer(input.getNextInt());
-        }
     }
 }
