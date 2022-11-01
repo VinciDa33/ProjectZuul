@@ -11,7 +11,13 @@ public class InputManager {
         return reader.nextLine();
     }
     public int getNextInt(){
-        return reader.nextInt();
+        String temp = reader.nextLine();
+        try {
+            return Integer.parseInt(temp);
+        }
+        catch (Exception e){
+            return -100;
+        }
     }
     public char getNextChar(){
         return reader.nextLine().charAt(0);
