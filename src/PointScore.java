@@ -4,7 +4,7 @@ public class PointScore {
     public static void addPoints(int pointScore){
         this.points += pointScore;
     }
-    
+
     public static int getPoints(){
         return points;
     }
