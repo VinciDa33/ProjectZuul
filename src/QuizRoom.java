@@ -1,13 +1,16 @@
 import java.util.ArrayList;
 
 public abstract class QuizRoom extends Room{
-    private String question;
-    private boolean skipOnAnswer;
-    ArrayList<String> answers;
-    ArrayList<String> responses;
+    String question;
+    boolean skipOnAnswer;
+    boolean questionDone;
+    boolean questionAnswered;
+    ArrayList<String> answers = new ArrayList<>();
+    ArrayList<String> responses = new ArrayList<>();
+
 
     public void setSkipOnAnswer(boolean skipOnAnswer){
         this.skipOnAnswer = skipOnAnswer;
     }
-    public abstract void answer(String answer);
+    public abstract void answer(int answer);
 }
