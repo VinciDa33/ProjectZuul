@@ -17,28 +17,76 @@ public class GameManager {
         while(isPlaying){
             activeRoom.update();
         }
+        PointScore.printScore();
     }
     private void createRooms(){
-        // Coming soon
-        CorrectQuizRoom testRoom, testRoom2;
-        InfoRoom room3;
+        // Room creation
+        InfoRoom introductionRoom, playedBeforeRoom, hubRoom, courseStartRoom, solderingInfoRoom,
+                cableInfoRoom, computerInfoRoom, sortingInfoRoom,troubleshootInfoRoom, powerOutInfoRoom;
+        CorrectQuizRoom solderingCorrectRoom, cableCorrectRoom, computerCorrectRoom, sortingCorrectRoom,
+                troubleshootCorrectRoom, powerOutCorrectRoom;
+        PointQuizRoom solderingPointRoom, cablePointRoom, computerPointRoom, sortingPointRoom,
+                troubleshootPointRoom, powerOutPointRoom;
 
-        testRoom = new CorrectQuizRoom("2 + 2",this, input);
-        testRoom.addAnswer("9", "Unfortunately, that answer is wrong, 2+2 is not 9.", false);
-        testRoom.addAnswer("4", "Well done, you answered that correctly", true);
+        // Info Rooms
+        introductionRoom = new InfoRoom(
+                "Welcome to this game called RepairZuul.\n" +
+                "In this game you learn basic repair.\n" +
+                "You will get options to each question\n" +
+                        "where you will select the one you think is right.\n" +
+                        "At the end you would be getting a score fitting for your answers",this, input);
+        playedBeforeRoom = new InfoRoom("Have you played before?",this, input);
+        hubRoom = new InfoRoom("Welcome to the learning hub",this, input);
+        courseStartRoom = new InfoRoom("This is a short course, and it will teach you the basics of repairing", this, input);
 
-        testRoom2 = new CorrectQuizRoom("is School fun",this, input);
-        testRoom2.addAnswer("No", "You are could be right, but we don't think so.", false);
-        testRoom2.addAnswer("Yes", "Big win right there!", true);
+        solderingInfoRoom = new InfoRoom("Info about Soldering", this, input);
+        cableInfoRoom = new InfoRoom("", this,input);
+        computerInfoRoom = new InfoRoom("", this,input);
+        sortingInfoRoom = new InfoRoom("", this,input);
+        troubleshootInfoRoom = new InfoRoom("", this,input);
+        powerOutInfoRoom = new InfoRoom("", this,input);
 
-        room3 = new InfoRoom("This is learning material: Schools is not fun, now continue to the next question.",this, input);
+        // Questions and point rooms
+            // Right or Wrong
+        solderingCorrectRoom = new CorrectQuizRoom("Something", this, input);
+        cableCorrectRoom = new CorrectQuizRoom("Something", this, input);
+        computerCorrectRoom = new CorrectQuizRoom("Something", this, input);
+        sortingCorrectRoom = new CorrectQuizRoom("Something", this, input);
+        troubleshootCorrectRoom = new CorrectQuizRoom("Something", this, input);
+        powerOutCorrectRoom = new CorrectQuizRoom("Something", this, input);
 
-        testRoom.setExit("Continue",room3);
-        room3.setExit("Continue", testRoom2);
-        room3.setExit("Back", testRoom);
-        testRoom2.setExit("Back",room3);
+            // Point giving
+        solderingPointRoom = new PointQuizRoom("Something", this, input);
+        cablePointRoom = new PointQuizRoom("Something", this, input);
+        computerPointRoom = new PointQuizRoom("Something", this, input);
+        sortingPointRoom = new PointQuizRoom("Something", this, input);
+        troubleshootPointRoom = new PointQuizRoom("Something", this, input);
+        powerOutPointRoom = new PointQuizRoom("Something", this, input);
 
-        goToRoom(testRoom);
+        // Answers
+            // Right or Wrong
+
+            // Point giving
+        
+
+        // Navigation
+        introductionRoom.setExit("Continue", playedBeforeRoom);
+        playedBeforeRoom.setExit("Yes", hubRoom);
+        playedBeforeRoom.setExit("No", courseStartRoom);
+        courseStartRoom.setExit("Back", playedBeforeRoom);
+
+        // Hub Navigation
+        hubRoom.setExit("Soldering", solderingInfoRoom);
+        hubRoom.setExit("Cable", cableInfoRoom);
+        hubRoom.setExit("Computer", computerInfoRoom);
+        hubRoom.setExit("Sorting", sortingInfoRoom);
+        hubRoom.setExit("Troubleshoot", troubleshootInfoRoom);
+        hubRoom.setExit("Power", powerOutInfoRoom);
+
+        // Exam Navigation
+
+        // Go to Room
+        goToRoom(introductionRoom);
     }
     public void goToRoom(Room room){
         this.activeRoom = room;
