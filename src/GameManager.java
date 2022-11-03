@@ -17,6 +17,7 @@ public class GameManager {
         while(isPlaying){
             activeRoom.update();
         }
+        System.out.print("Your final score was ");
         PointScore.printScore();
     }
     private void createRooms(){
@@ -70,18 +71,18 @@ public class GameManager {
         
 
         // Navigation
-        introductionRoom.setExit("Continue", playedBeforeRoom);
-        playedBeforeRoom.setExit("Yes", hubRoom);
-        playedBeforeRoom.setExit("No", courseStartRoom);
-        courseStartRoom.setExit("Back", playedBeforeRoom);
+        introductionRoom.setExit("continue", playedBeforeRoom);
+        playedBeforeRoom.setExit("yes", hubRoom);
+        playedBeforeRoom.setExit("no", courseStartRoom);
+        courseStartRoom.setExit("back", playedBeforeRoom);
 
         // Hub Navigation
-        hubRoom.setExit("Soldering", solderingInfoRoom);
-        hubRoom.setExit("Cable", cableInfoRoom);
-        hubRoom.setExit("Computer", computerInfoRoom);
-        hubRoom.setExit("Sorting", sortingInfoRoom);
-        hubRoom.setExit("Troubleshoot", troubleshootInfoRoom);
-        hubRoom.setExit("Power", powerOutInfoRoom);
+        hubRoom.setExit("soldering", solderingInfoRoom);
+        hubRoom.setExit("cable", cableInfoRoom);
+        hubRoom.setExit("computer", computerInfoRoom);
+        hubRoom.setExit("sorting", sortingInfoRoom);
+        hubRoom.setExit("troubleshoot", troubleshootInfoRoom);
+        hubRoom.setExit("power", powerOutInfoRoom);
 
         // Exam Navigation
 

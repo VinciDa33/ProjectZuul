@@ -17,6 +17,11 @@ public class CorrectQuizRoom extends QuizRoom{
     }
     @Override
     public void answer(int answer) {
+        if (answer == 0) {
+            System.out.println("[[ Not Answered ]]");
+            System.out.println("[[ If you do not know the answer, try having another look at the learning material. ]]");
+            questionCorrect = true;
+        }
         if (answer-1 >= correct.size() || answer-1 < 0){
             System.out.println("Unknown Answer!");
             return;

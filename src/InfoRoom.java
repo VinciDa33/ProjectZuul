@@ -18,13 +18,11 @@ public class InfoRoom extends Room{
         OptionPrinter.printHashmapOptions(exits);
 
         String userInput = input.getNextLine();
-        for ( String key : exits.keySet() ){
-            if (userInput.equals(key)){
-                gm.goToRoom(exits.get(userInput));
-                return;
-            }
+        if (exits.containsKey(userInput)) {
+            gm.goToRoom(exits.get(userInput));
+            return;
         }
-        if (userInput.equals("Quit")) {
+        if (userInput.equals("quit")) {
             gm.quitGame();
             return;
         }

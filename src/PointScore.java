@@ -1,6 +1,5 @@
 public class PointScore {
     private static int points;
-
     public static void addPoints(int pointScore){
         points += pointScore;
     }
