@@ -8,7 +8,7 @@ public class InputManager {
     }
 
     public String getNextLine(){
-        return reader.nextLine();
+        return reader.nextLine().toLowerCase();
     }
     public int getNextInt(){
         String temp = reader.nextLine();
@@ -20,7 +20,7 @@ public class InputManager {
         }
     }
     public char getNextChar(){
-        return reader.nextLine().charAt(0);
+        return reader.nextLine().toLowerCase().charAt(0);
     }
     public double getNextDouble(){
         return reader.nextDouble();
