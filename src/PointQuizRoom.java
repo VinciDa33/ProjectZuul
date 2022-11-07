@@ -2,7 +2,8 @@ import java.util.ArrayList;
 
 public class PointQuizRoom extends QuizRoom{
     private ArrayList<Integer> points = new ArrayList<>();
-    boolean isTest = false;
+    private boolean isTest = false;
+
     PointQuizRoom(String question, GameManager gm, InputManager im){
         this.question = question;
         this.gm = gm;
@@ -15,6 +16,14 @@ public class PointQuizRoom extends QuizRoom{
         responses.add(response);
         points.add(score);
     }
+
+    public void setTest(boolean b) {
+        isTest = b;
+    }
+    public boolean isTest() {
+        return isTest;
+    }
+
     @Override
     public void answer(int answer) {
         if (answer == 0) {
