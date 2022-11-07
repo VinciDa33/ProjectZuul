@@ -50,9 +50,4 @@ public class PointQuizRoom extends QuizRoom{
         }
         questionAnswered = true;
     }
-
-    public void SetTest(boolean b) {
-        isTest = b;
-    }
-
 }
