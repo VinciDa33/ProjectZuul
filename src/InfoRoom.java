@@ -15,7 +15,7 @@ public class InfoRoom extends Room{
 
     @Override
     public void update(){
-        OptionPrinter.printHashmapOptions(exits);
+        printExitOptions();
 
         String userInput = input.getNextLine();
         for ( String key : exits.keySet() ){

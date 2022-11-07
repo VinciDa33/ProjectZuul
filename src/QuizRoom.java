@@ -29,7 +29,7 @@ public abstract class QuizRoom extends Room{
     @Override
     public void update() {
         if (questionAnswered && (questionCorrect || skipOnAnswer)){
-            OptionPrinter.printHashmapOptions(exits);
+            printExitOptions();
 
             String userInput = input.getNextLine();
             for (String key : exits.keySet()) {
