@@ -16,6 +16,8 @@ public abstract class QuizRoom extends Room{
 
     @Override
     public void onEnterRoom() {
+        questionCorrect = false;
+        questionAnswered = false;
         System.out.println("---------- Question ----------");
         System.out.println(question);
         System.out.println("\n---------- oooooooo ----------\n");
