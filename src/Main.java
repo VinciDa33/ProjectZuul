@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        GameManager gm = new GameManager();
+        InputManager.getInstance();
+        GameManager gm = GameManager.getInstance();
         gm.play();
     }
 }

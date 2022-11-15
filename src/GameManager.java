@@ -1,10 +1,10 @@
 public class GameManager {
-    private final InputManager input;
+    private static GameManager instance;
+
     private Room activeRoom;
     private boolean isPlaying = false;
 
-    GameManager(){
-        input = new InputManager();
+    private GameManager(){
         createRooms();
     }
 
@@ -20,6 +20,15 @@ public class GameManager {
         System.out.print("Your final score was ");
         PointScore.printScore();
     }
+
+    public static GameManager getInstance() {
+        if (instance != null) {
+            return instance;
+        }
+        instance = new GameManager();
+        return instance;
+    }
+
     private void createRooms(){
         // Room creation
         InfoRoom introductionRoom, playedBeforeRoom, hubRoom, courseStartRoom, solderingInfoRoom,
@@ -36,10 +45,10 @@ public class GameManager {
                 "In this game you learn basic repair.\n" +
                 "You will get options to each question\n" +
                         "where you will select the one you think is right.\n" +
-                        "At the end you would be getting a score fitting for your answers",this, input);
-        playedBeforeRoom = new InfoRoom("Have you played before?",this, input);
-        hubRoom = new InfoRoom("Welcome to the learning hub",this, input);
-        courseStartRoom = new InfoRoom("This is a short course, and it will teach you the basics of repairing", this, input);
+                        "At the end you would be getting a score fitting for your answers");
+        playedBeforeRoom = new InfoRoom("Have you played before?");
+        hubRoom = new InfoRoom("Welcome to the learning hub");
+        courseStartRoom = new InfoRoom("This is a short course, and it will teach you the basics of repairing");
 
         solderingInfoRoom = new InfoRoom("It could be a good idea to learn how to solder basic components since it is a versatile tool,\n " +
                                                     "which can save a lot of components from being thrown out.Soldering is a bit like welding, but easier and less dangerous.\n" +
@@ -54,13 +63,13 @@ public class GameManager {
                                                     "Hold the electrical components together [TURN OFF ALL COMPONENTS FIRST].\n" +
                                                     "Heat up the joint before applying solder. When the joint is heated,\n" +
                                                     "melt the solder on the joint, not on the iron. Let the solder cool and solidify,\n" +
-                                                    "do not blow on the solder.\n- All done!", this, input);
+                                                    "do not blow on the solder.\n- All done!");
         cableInfoRoom = new InfoRoom("When troubleshooting your computer or other components, one of the most common mistakes begins with the cables.\n" +
                                             "It can be all from not connecting your hardware to power or not enough power,\n" +
                                             "to outright faulty cables or misplacements, which can cause in the most extreme cases fires.\n" +
                                             "Therefore its important to keep the power clean and running with no faults.\n" +
                                             "\n\n\nA good practice is to always to keep your cables under as less tension as possible for them to not bend/break,\n" +
-                                            "and to keep them clean and checking for no visible copper wires.", this, input);
+                                            "and to keep them clean and checking for no visible copper wires.");
         computerInfoRoom = new InfoRoom("This room will teach you to assemble a computer with all parts of the PC in the easiest order.\n" +
                 "When building a computer it is easiest to assemble most of the components on the motherboard before mounting the motherboard in the case, \n" +
                 "however it is possible to mount the motherboard in the case beforehand, but it be more difficult with the limited space in the case.\n" +
@@ -104,7 +113,7 @@ public class GameManager {
                 "Organizing these cables will also allow you to make changes easier later.\n" +
                 "\n" +
                 "Step 11:\n" +
-                "Install the operating system and drivers for the components for optimal performance.", this, input);
+                "Install the operating system and drivers for the components for optimal performance.");
         sortingInfoRoom = new InfoRoom("If you deem reparation too hard, but still want to recycle your electronics as best as possible,\n" +
                                                 "there are still some options to keep in mind.\n" +
                                                 "- Take it to a recycler" +
@@ -115,38 +124,38 @@ public class GameManager {
                                                 "If your product still works, or has working parts you can donate it to charity or nonprofit organizations.\n\n" +
                                                 "Buyback might be possible for some products. Larger companies may have programs, with rewards for bringing back E-waste.\n" +
                                                 "Amazon for example offers gift cards for old electronics devices.\n\n" +
-                                                "These options should be considered, if you are not keen to start repairing.", this, input);
-        troubleshootInfoRoom = new InfoRoom("", this, input);
+                                                "These options should be considered, if you are not keen to start repairing.");
+        troubleshootInfoRoom = new InfoRoom("");
         powerOutInfoRoom = new InfoRoom("Usually when we plug something into an power outlet, then we are used to press the on/off button.\n" +
                                                 "This is something a common man knows from the beginning of time with power outlets.\n" +
                                                 "But when something goes wrong with our power outlets then we can extremely be concerned about fire.\n" +
                                                 "So, in this case we will introduce the Questions, which relate to the things and tools which are required to fixing a power outlet.\n" +
-                                                "Though in many cases it would be advised to contact professionals!", this, input);
+                                                "Though in many cases it would be advised to contact professionals!");
 
         // Questions and point rooms
             // Right or Wrong
-        solderingCorrectRoom = new CorrectQuizRoom("Where should you melt the solder?", this, input);
-        cableCorrectRoom = new CorrectQuizRoom("When connecting some hardware (like a Graphical Processor Unit)\nto your computer and thereafter connecting the power cables to the GPU,\nis there anything you'll need to be extra careful around? and why?", this, input);
-        computerCorrectRoom = new CorrectQuizRoom("What way should the fan on the PSU face?", this, input);
-        sortingCorrectRoom = new CorrectQuizRoom("Something", this, input);
-        troubleshootCorrectRoom = new CorrectQuizRoom("Something", this, input);
-        powerOutCorrectRoom = new CorrectQuizRoom("Something", this, input);
+        solderingCorrectRoom = new CorrectQuizRoom("Where should you melt the solder?");
+        cableCorrectRoom = new CorrectQuizRoom("When connecting some hardware (like a Graphical Processor Unit)\nto your computer and thereafter connecting the power cables to the GPU,\nis there anything you'll need to be extra careful around? and why?");
+        computerCorrectRoom = new CorrectQuizRoom("What way should the fan on the PSU face?");
+        sortingCorrectRoom = new CorrectQuizRoom("Something");
+        troubleshootCorrectRoom = new CorrectQuizRoom("Something");
+        powerOutCorrectRoom = new CorrectQuizRoom("Something");
 
             // Point giving
-        solderingPointRoom = new PointQuizRoom("What is the most used alloy for soldering?", this, input);
-        cablePointRoom = new PointQuizRoom("Before installing the cables in your new machine, what is a good practice to check beforehand?", this, input);
-        cablePointRoom2 = new PointQuizRoom("When connecting the cables in your machine, what guidelines should you follow?", this, input);
-        computerPointRoom = new PointQuizRoom("When do you mount the motherboard in the case?", this, input);
-        sortingPointRoom = new PointQuizRoom("Something", this, input);
-        troubleshootPointRoom = new PointQuizRoom("Something", this, input);
-        powerOutPointRoom = new PointQuizRoom("What do you do when you see a colored outlet?", this, input);
-        powerOutPointRoom2 = new PointQuizRoom("What would you do if your electrical cable comes easily out of the plug?", this, input);
-        powerOutPointRoom3 = new PointQuizRoom("Which set of tools require for a power outlet to be changed with?", this, input);
+        solderingPointRoom = new PointQuizRoom("What is the most used alloy for soldering?");
+        cablePointRoom = new PointQuizRoom("Before installing the cables in your new machine, what is a good practice to check beforehand?");
+        cablePointRoom2 = new PointQuizRoom("When connecting the cables in your machine, what guidelines should you follow?");
+        computerPointRoom = new PointQuizRoom("When do you mount the motherboard in the case?");
+        sortingPointRoom = new PointQuizRoom("Something");
+        troubleshootPointRoom = new PointQuizRoom("Something");
+        powerOutPointRoom = new PointQuizRoom("What do you do when you see a colored outlet?");
+        powerOutPointRoom2 = new PointQuizRoom("What would you do if your electrical cable comes easily out of the plug?");
+        powerOutPointRoom3 = new PointQuizRoom("Which set of tools require for a power outlet to be changed with?");
 
             // Exam Rooms
-        exam1 = new PointQuizRoom("When do you mount the motherboard in the case?", this, input);
-        exam2 = new PointQuizRoom("What do you do when you see a colored outlet?", this, input);
-        exam3 = new PointQuizRoom("Before installing the cables in your new machine, what is a good practice to check beforehand?", this, input);
+        exam1 = new PointQuizRoom("When do you mount the motherboard in the case?");
+        exam2 = new PointQuizRoom("What do you do when you see a colored outlet?");
+        exam3 = new PointQuizRoom("Before installing the cables in your new machine, what is a good practice to check beforehand?");
 
         // Answers
             // Right or Wrong

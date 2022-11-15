@@ -1,10 +1,8 @@
 public class InfoRoom extends Room{
     String description;
 
-    public InfoRoom(String description, GameManager gm, InputManager im) {
+    public InfoRoom(String description) {
         this.description = description;
-        this.gm = gm;
-        this.input = im;
     }
 
     @Override
@@ -17,13 +15,13 @@ public class InfoRoom extends Room{
     public void update(){
         printExitOptions();
 
-        String userInput = input.getNextLine();
+        String userInput = InputManager.getInstance().getNextLine();
         if (exits.containsKey(userInput)) {
-            gm.goToRoom(exits.get(userInput));
+            GameManager.getInstance().goToRoom(exits.get(userInput));
             return;
         }
         if (userInput.equals("quit")) {
-            gm.quitGame();
+            GameManager.getInstance().quitGame();
             return;
         }
 

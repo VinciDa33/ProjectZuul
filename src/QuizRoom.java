@@ -34,19 +34,19 @@ public abstract class QuizRoom extends Room{
         if (questionAnswered && (questionCorrect || skipOnAnswer)){
             printExitOptions();
 
-            String userInput = input.getNextLine();
+            String userInput = InputManager.getInstance().getNextLine();
             if (exits.containsKey(userInput)) {
-                gm.goToRoom(exits.get(userInput));
+                GameManager.getInstance().goToRoom(exits.get(userInput));
                 return;
             }
             if (userInput.equals("quit")) {
-                gm.quitGame();
+                GameManager.getInstance().quitGame();
                 return;
             }
             System.out.println("Unknown input!");
         }
         else{
-            answer(input.getNextInt());
+            answer(InputManager.getInstance().getNextInt());
         }
     }
 }
