@@ -1,13 +1,10 @@
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 
 public class CorrectQuizRoom extends QuizRoom{
     private ArrayList<Boolean> correct = new ArrayList<>();
 
-    CorrectQuizRoom(String question, GameManager gm, InputManager im){
+    CorrectQuizRoom(String question){
         this.question = question;
-        this.gm = gm;
-        this.input = im;
     }
 
     public void addAnswer(String answer, String response, boolean isCorrect){

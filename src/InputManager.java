@@ -1,9 +1,11 @@
 import java.util.Scanner;
 
 public class InputManager {
+    private static InputManager instance;
+
     private Scanner reader;
 
-    public InputManager(){
+    private InputManager(){
         reader = new Scanner(System.in);
     }
 
@@ -16,13 +18,18 @@ public class InputManager {
             return Integer.parseInt(temp);
         }
         catch (Exception e){
-            return -100;
+            return -101;
         }
     }
     public char getNextChar(){
         return reader.nextLine().toLowerCase().charAt(0);
     }
-    public double getNextDouble(){
-        return reader.nextDouble();
+
+    public static InputManager getInstance() {
+        if (instance != null) {
+            return instance;
+        }
+        instance = new InputManager();
+        return instance;
     }
 }

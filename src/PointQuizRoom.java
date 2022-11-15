@@ -4,10 +4,8 @@ public class PointQuizRoom extends QuizRoom{
     private ArrayList<Integer> points = new ArrayList<>();
     private boolean isTest = false;
 
-    PointQuizRoom(String question, GameManager gm, InputManager im){
+    PointQuizRoom(String question){
         this.question = question;
-        this.gm = gm;
-        this.input = im;
     }
 
 
