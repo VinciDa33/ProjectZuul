@@ -1,3 +1,6 @@
+
+//INPUT MANAGER REPLACED BY GUI BUTTONS FOR INPUT
+/*
 import java.util.Scanner;
 
 public class InputManager {
@@ -33,3 +36,4 @@ public class InputManager {
         return instance;
     }
 }
+ */

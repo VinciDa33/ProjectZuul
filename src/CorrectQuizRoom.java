@@ -1,3 +1,6 @@
+import javafx.scene.Group;
+import javafx.scene.Scene;
+
 import java.util.ArrayList;
 
 public class CorrectQuizRoom extends QuizRoom{
@@ -13,7 +16,8 @@ public class CorrectQuizRoom extends QuizRoom{
         correct.add(isCorrect);
     }
     @Override
-    public void answer(int answer) {
+    public void answerQuestion(int answer) {
+        /*
         if (answer == 0) {
             System.out.println("[[ Not Answered ]]");
             System.out.println("[[ If you do not know the answer, try having another look at the learning material. ]]");
@@ -32,6 +36,18 @@ public class CorrectQuizRoom extends QuizRoom{
             System.out.println("[[ Wrong ]]");
             System.out.println(responses.get(answer-1));
         }
+         */
+
+        if (correct.get(answer)) {
+            responseLabel.setText("\n[[ CORRECT ]]\n\n" + responses.get(answer));
+            questionCorrect = true;
+        }
+        else {
+            responseLabel.setText("\n[[ INCORRECT ]]\n\n" + responses.get(answer));
+        }
+
         questionAnswered = true;
+
+        updateAnswerBox();
     }
 }

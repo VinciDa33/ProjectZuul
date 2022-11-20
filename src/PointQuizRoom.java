@@ -18,12 +18,11 @@ public class PointQuizRoom extends QuizRoom{
     public void setTest(boolean b) {
         isTest = b;
     }
-    public boolean isTest() {
-        return isTest;
-    }
 
     @Override
-    public void answer(int answer) {
+    public void answerQuestion(int answer) {
+        //REPLACED BY GUI
+        /*
         if (answer == 0) {
             System.out.println("[[ Not Answered ]]");
             System.out.println("[[ If you do not know the answer, try having another look at the learning material. ]]");
@@ -33,19 +32,23 @@ public class PointQuizRoom extends QuizRoom{
             System.out.println("Unknown Answer!");
             return;
         }
-        if (points.get(answer-1) == 100){
-            System.out.println("[[ 100 points]]");
-            System.out.println(responses.get(answer-1));
+
+         */
+
+        responseLabel.setText("\n[[ " + points.get(answer) + " points ]]\n\n" + responses.get(answer));
+        if (points.get(answer) == 100) {
             questionCorrect = true;
         }
-        else{
-            System.out.println("[[ "+points.get(answer-1)+" points ]]");
-            System.out.println(responses.get(answer-1));
-        }
+
+        //REPLACED BY GUI
+        //System.out.println("[[ "+points.get(answer-1)+" points ]]");
+        //System.out.println(responses.get(answer-1));
 
         if (isTest) {
-            PointScore.addPoints(points.get(answer - 1));
+            PointScore.addPoints(points.get(answer));
         }
         questionAnswered = true;
+
+        updateAnswerBox();
     }
 }

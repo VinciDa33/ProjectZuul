@@ -1,13 +1,18 @@
+import javax.sound.sampled.Line;
+
 public class GameManager {
     private static GameManager instance;
 
-    private Room activeRoom;
-    private boolean isPlaying = false;
+    //REPLACED BY GUI
+    //private Room activeRoom;
+    //private boolean isPlaying = false;
 
     private GameManager(){
         createRooms();
     }
 
+    //REPLACED BY GUI
+    /*
     public void play(){
         if(isPlaying)
             return;
@@ -20,6 +25,7 @@ public class GameManager {
         System.out.print("Your final score was ");
         PointScore.printScore();
     }
+     */
 
     public static GameManager getInstance() {
         if (instance != null) {
@@ -32,7 +38,7 @@ public class GameManager {
     private void createRooms(){
         // Room creation
         InfoRoom introductionRoom, playedBeforeRoom, hubRoom, courseStartRoom, solderingInfoRoom,
-                cableInfoRoom, computerInfoRoom, sortingInfoRoom,troubleshootInfoRoom, powerOutInfoRoom;
+                cableInfoRoom, computerInfoRoom, sortingInfoRoom,troubleshootInfoRoom, powerOutInfoRoom, pointShowcaseRoom;
         CorrectQuizRoom solderingCorrectRoom, cableCorrectRoom, computerCorrectRoom, sortingCorrectRoom,
                 troubleshootCorrectRoom, powerOutCorrectRoom;
         PointQuizRoom solderingPointRoom, cablePointRoom, cablePointRoom2 ,computerPointRoom, sortingPointRoom,
@@ -131,6 +137,7 @@ public class GameManager {
                                                 "But when something goes wrong with our power outlets then we can extremely be concerned about fire.\n" +
                                                 "So, in this case we will introduce the Questions, which relate to the things and tools which are required to fixing a power outlet.\n" +
                                                 "Though in many cases it would be advised to contact professionals!");
+        pointShowcaseRoom = new InfoRoom("You have finished the test.\nYour final score was: " + PointScore.getPoints());
 
         // Questions and point rooms
             // Right or Wrong
@@ -281,16 +288,13 @@ public class GameManager {
         hubRoom.setExit("exam", exam1);
         exam1.setExit("continue", exam2);
         exam2.setExit("continue", exam3);
+        exam3.setExit("continue", pointShowcaseRoom);
 
         // Go to Room
         goToRoom(introductionRoom);
     }
     public void goToRoom(Room room){
-        this.activeRoom = room;
-        activeRoom.onEnterRoom();
-    }
-
-    public void quitGame() {
-        isPlaying = false;
+        //this.activeRoom = room;
+        room.onEnterRoom();
     }
 }

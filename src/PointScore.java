@@ -8,7 +8,10 @@ public class PointScore {
         return points;
     }
 
+    //NO LONGER USEFUL FOR GUI
+    /*
     public static void printScore(){
         System.out.println(points);
     }
+     */
 }
