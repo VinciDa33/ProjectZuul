@@ -1,12 +1,15 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 
@@ -20,7 +23,8 @@ public abstract class QuizRoom extends Room{
 
     //GUI RELATED VARIABLES
     Label responseLabel;
-    VBox answerBox;
+    VBox answerLabelBox;
+    HBox answerBox;
 
     public void setSkipOnAnswer(boolean skipOnAnswer){
         this.skipOnAnswer = skipOnAnswer;
@@ -32,105 +36,82 @@ public abstract class QuizRoom extends Room{
         questionCorrect = false;
         questionAnswered = false;
 
-        //REPLACED BY GUI
-        /*
-        System.out.println("---------- Question ----------");
-        System.out.println(question);
-        System.out.println("\n---------- oooooooo ----------\n");
-
-        //Prints every answer option for the user
-        for (int i = 0; i < answers.size(); i++) {
-            System.out.println("[" + (i+1) + "]: " + answers.get(i));
-        }
-        System.out.println("[0] Skip Question: ");
-        System.out.println("Write the number of the answer you wish to choose.");
-         */
-
         GUIManager.setScene(createGUI());
     }
 
-    //REPLACED BY GUI - EVENT BASED EXECUTION
-    /*
-    @Override
-    public void update() {
-        if (questionAnswered && (questionCorrect || skipOnAnswer)){
-            printExitOptions();
-
-            String userInput = InputManager.getInstance().getNextLine();
-            if (exits.containsKey(userInput)) {
-                GameManager.getInstance().goToRoom(exits.get(userInput));
-                return;
-            }
-            if (userInput.equals("quit")) {
-                //GameManager.getInstance().quitGame();
-                return;
-            }
-            System.out.println("Unknown input!");
-        }
-        else{
-            answer(InputManager.getInstance().getNextInt());
-        }
-    }
-     */
 
     @Override
     public Scene createGUI() {
         //Setting up the main boxes for holding components
-        HBox horBox = new HBox();
-        horBox.setBackground(new Background(new BackgroundFill(Color.rgb(30, 30, 30), CornerRadii.EMPTY, Insets.EMPTY)));
+        VBox vertBox = new VBox();
+        vertBox.setBackground(new Background(new BackgroundFill(Color.rgb(30, 30, 30), CornerRadii.EMPTY, Insets.EMPTY)));
+
+        HBox topBox = new HBox();
+        topBox.setBackground(new Background(new BackgroundFill(Color.rgb(30, 30, 30), CornerRadii.EMPTY, Insets.EMPTY)));
+        topBox.setPrefHeight(GUIManager.getSizeY()/4f*3);
+
+        HBox bottomBox = new HBox();
+        bottomBox.setBackground(new Background(new BackgroundFill(Color.rgb(100, 50, 50), CornerRadii.EMPTY, Insets.EMPTY)));
+        bottomBox.setPrefHeight(GUIManager.getSizeY()/4f);
+        bottomBox.setAlignment(Pos.CENTER);
+        bottomBox.setSpacing(10);
 
         VBox leftBox = new VBox();
-        leftBox.setBackground(new Background(new BackgroundFill(Color.rgb(30, 30, 30), CornerRadii.EMPTY, Insets.EMPTY)));
+        leftBox.setBackground(new Background(new BackgroundFill(Color.rgb(50, 50, 50), CornerRadii.EMPTY, Insets.EMPTY)));
+        leftBox.setPrefWidth(GUIManager.getSizeX()/2f);
+        leftBox.setAlignment(Pos.TOP_CENTER);
+
+        if (imageString != null) {
+            Image backImg = new Image(imageString, 640, 540, false, false);
+            BackgroundImage bImg = new BackgroundImage(backImg, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+            Background bGround = new Background(bImg);
+            leftBox.setBackground(bGround);
+        }
+
         VBox rightBox = new VBox();
         rightBox.setBackground(new Background(new BackgroundFill(Color.rgb(50, 50, 50), CornerRadii.EMPTY, Insets.EMPTY)));
+        rightBox.setPrefWidth(GUIManager.getSizeX()/2f);
+        rightBox.setAlignment(Pos.TOP_CENTER);
+        rightBox.setSpacing(15);
+        rightBox.setPadding(new Insets(50, 0, 0, 0));
+
+        answerBox = bottomBox;
+        answerLabelBox = rightBox;
 
         //The label with the description
-        Label descriptionLabel = new Label("--- Question ---\n\n" + question);
-        descriptionLabel.setTextFill(Color.rgb(220, 220, 220));
-        leftBox.getChildren().add(descriptionLabel);
+        Label questionLabel = new Label("--- Question ---\n\n" + question);
+        questionLabel.setTextFill(Color.rgb(220, 220, 220));
+        questionLabel.setPadding(new Insets(50, 0, 0, 0));
+        questionLabel.setFont(Font.font("Verdana", 28));
+        questionLabel.setTextAlignment(TextAlignment.CENTER);
+        questionLabel.setWrapText(true);
+        leftBox.getChildren().add(questionLabel);
 
         responseLabel = new Label();
         responseLabel.setTextFill(Color.rgb(220, 220, 220));
+        responseLabel.setPadding(new Insets(50, 0, 0, 0));
+        responseLabel.setFont(Font.font("Verdana", 22));
+        responseLabel.setTextAlignment(TextAlignment.CENTER);
+        responseLabel.setWrapText(true);
         leftBox.getChildren().add(responseLabel);
 
         //Creates a label and a button for each answer option in the room
-        for (int i = 0; i < answers.size(); i++) {
-            Label answerOption = new Label(answers.get(i));
-            answerOption.setTextFill(Color.rgb(220, 220, 220));
-            rightBox.getChildren().add(answerOption);
-
-            int index = i;
-            Button button = new Button("Answer [" + i + "]");
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    answerQuestion(index);
-                }
-            });
-            rightBox.getChildren().add(button);
-        }
-
-        //The quit game button
-        Button exitButton = new Button("Quit");
-        exitButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                GUIManager.quitGame();
-            }
-        });
-        rightBox.getChildren().add(exitButton);
+        updateAnswerBox();
 
 
         //Adding components to main component and returning scene
-        horBox.getChildren().add(leftBox);
-        horBox.getChildren().add(rightBox);
+        topBox.getChildren().add(leftBox);
+        topBox.getChildren().add(rightBox);
 
-        answerBox = rightBox;
-        return new Scene(horBox, GUIManager.getSizeX(), GUIManager.getSizeY());
+        vertBox.getChildren().add(topBox);
+        vertBox.getChildren().add(bottomBox);
+
+        return new Scene(vertBox, GUIManager.getSizeX(), GUIManager.getSizeY());
     }
 
     public void updateAnswerBox() {
         answerBox.getChildren().clear();
+        answerLabelBox.getChildren().clear();
 
         if (questionCorrect || (questionAnswered && skipOnAnswer)) {
             //Creates a button for each exit option in the room
@@ -142,24 +123,31 @@ public abstract class QuizRoom extends Room{
                         GameManager.getInstance().goToRoom(exits.get(key));
                     }
                 });
+                button.setPrefSize(160, 80);
+                button.setFont(Font.font("Verdana", 18));
                 answerBox.getChildren().add(button);
             }
         }
         else {
             //Creates a label and a button for each answer option in the room
             for (int i = 0; i < answers.size(); i++) {
-                Label answerOption = new Label(answers.get(i));
-                answerOption.setTextFill(Color.rgb(220, 220, 220));
-                answerBox.getChildren().add(answerOption);
+                Label answerLabel = new Label("[" + (i+1) + "] " + answers.get(i));
+                answerLabel.setTextFill(Color.rgb(220, 220, 220));
+                answerLabel.setFont(Font.font("Verdana", 18));
+                answerLabel.setTextAlignment(TextAlignment.CENTER);
+                answerLabel.setWrapText(true);
+                answerLabelBox.getChildren().add(answerLabel);
 
                 int index = i;
-                Button button = new Button("Answer [" + i + "]");
+                Button button = new Button("Answer #" + (i+1));
                 button.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
                         answerQuestion(index);
                     }
                 });
+                button.setPrefSize(160, 80);
+                button.setFont(Font.font("Verdana", 18));
                 answerBox.getChildren().add(button);
             }
         }
@@ -172,6 +160,8 @@ public abstract class QuizRoom extends Room{
                 GUIManager.quitGame();
             }
         });
+        exitButton.setPrefSize(160, 80);
+        exitButton.setFont(Font.font("Verdana", 24));
         answerBox.getChildren().add(exitButton);
     }
 }

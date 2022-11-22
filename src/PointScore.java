@@ -7,11 +7,4 @@ public class PointScore {
     public static int getPoints(){
         return points;
     }
-
-    //NO LONGER USEFUL FOR GUI
-    /*
-    public static void printScore(){
-        System.out.println(points);
-    }
-     */
 }

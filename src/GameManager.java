@@ -1,31 +1,10 @@
-import javax.sound.sampled.Line;
-
 public class GameManager {
     private static GameManager instance;
-
-    //REPLACED BY GUI
-    //private Room activeRoom;
-    //private boolean isPlaying = false;
 
     private GameManager(){
         createRooms();
     }
 
-    //REPLACED BY GUI
-    /*
-    public void play(){
-        if(isPlaying)
-            return;
-
-        isPlaying = true;
-
-        while(isPlaying){
-            activeRoom.update();
-        }
-        System.out.print("Your final score was ");
-        PointScore.printScore();
-    }
-     */
 
     public static GameManager getInstance() {
         if (instance != null) {
@@ -47,11 +26,12 @@ public class GameManager {
 
         // Info Rooms
         introductionRoom = new InfoRoom(
-                "Welcome to this game called RepairZuul.\n" +
-                "In this game you learn basic repair.\n" +
-                "You will get options to each question\n" +
-                        "where you will select the one you think is right.\n" +
+                "Welcome to this game called RepairZuul. " +
+                "In this game you learn basic repair. " +
+                "You will get options to each question " +
+                        "where you will select the one you think is right. " +
                         "At the end you would be getting a score fitting for your answers");
+        introductionRoom.setImage("Img/WorkshopBackground2.jpg");
         playedBeforeRoom = new InfoRoom("Have you played before?");
         hubRoom = new InfoRoom("Welcome to the learning hub");
         courseStartRoom = new InfoRoom("This is a short course, and it will teach you the basics of repairing");

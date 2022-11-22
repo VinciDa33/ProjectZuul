@@ -7,8 +7,8 @@ import javafx.stage.Stage;
 
 public class GUIManager extends Application {
     private static Stage mainWindow;
-    private final static int sizeX = 700;
-    private final static int sizeY = 500;
+    private final static int sizeX = 1280;
+    private final static int sizeY = 720;
 
     public static void main(String[] args) {
         launch(args);
