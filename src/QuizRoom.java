@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -19,7 +21,6 @@ public abstract class QuizRoom extends Room{
     Label responseLabel;
     VBox answerBox;
 
-
     public void setSkipOnAnswer(boolean skipOnAnswer){
         this.skipOnAnswer = skipOnAnswer;
     }
@@ -33,6 +34,9 @@ public abstract class QuizRoom extends Room{
     }
     @Override
     public Scene createGUI(){
+        Media sound = new Media(getClass().getResource("/sounds/effect.mp3").toExternalForm());
+        MediaPlayer mP = new MediaPlayer(sound);
+
         HBox hBox = new HBox();
         hBox.setBackground(new Background(new BackgroundFill(Color.rgb(100,50,30), CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -55,11 +59,12 @@ public abstract class QuizRoom extends Room{
             rightBox.getChildren().add(answerLabel);
 
             int index = i;
-            Button button = new Button("Answer nr. "+i+1);
+            Button button = new Button("Answer nr. "+i++);
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     answerQuestion(index);
+                    mP.play();
                 }
             });
             rightBox.getChildren().add(button);
@@ -71,6 +76,7 @@ public abstract class QuizRoom extends Room{
                 GUIManager.quitGame();
             }
         });
+
         rightBox.getChildren().add(quitButton);
         hBox.getChildren().addAll(leftBox,rightBox);
         answerBox = rightBox;
