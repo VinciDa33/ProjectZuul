@@ -1,3 +1,5 @@
+import javafx.scene.Scene;
+
 import java.util.ArrayList;
 
 public class CorrectQuizRoom extends QuizRoom{
@@ -13,25 +15,15 @@ public class CorrectQuizRoom extends QuizRoom{
         correct.add(isCorrect);
     }
     @Override
-    public void answer(int answer) {
-        if (answer == 0) {
-            System.out.println("[[ Not Answered ]]");
-            System.out.println("[[ If you do not know the answer, try having another look at the learning material. ]]");
-            questionCorrect = true;
-        }
-        if (answer-1 >= correct.size() || answer-1 < 0){
-            System.out.println("Unknown Answer!");
-            return;
-        }
-        if (correct.get(answer-1) == true){
-            System.out.println("[[ Correct ]]");
-            System.out.println(responses.get(answer-1));
-            questionCorrect = true;
-        }
-        else{
-            System.out.println("[[ Wrong ]]");
-            System.out.println(responses.get(answer-1));
-        }
-        questionAnswered = true;
+    public void answerQuestion(int answer) {
+       if (correct.get(answer)){
+           responseLabel.setText("\n[Correct]\n\n"+responses.get(answer));
+           questionCorrect = true;
+       }
+       else {
+           responseLabel.setText("\n[Incorrect]\n\n"+responses.get(answer));
+       }
+       questionAnswered = true;
+       updateAnswerBox();
     }
 }

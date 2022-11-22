@@ -1,3 +1,5 @@
+import javafx.scene.Scene;
+
 import java.util.ArrayList;
 
 public class PointQuizRoom extends QuizRoom{
@@ -23,29 +25,17 @@ public class PointQuizRoom extends QuizRoom{
     }
 
     @Override
-    public void answer(int answer) {
-        if (answer == 0) {
-            System.out.println("[[ Not Answered ]]");
-            System.out.println("[[ If you do not know the answer, try having another look at the learning material. ]]");
+    public void answerQuestion(int answer) {
+        responseLabel.setText("\n [Points: "+points.get(answer)+"]\n\n"+responses.get(answer));
+
+        if (points.get(answer) == 100){
             questionCorrect = true;
-        }
-        if (answer-1 >= points.size() || answer-1 < 0){
-            System.out.println("Unknown Answer!");
-            return;
-        }
-        if (points.get(answer-1) == 100){
-            System.out.println("[[ 100 points]]");
-            System.out.println(responses.get(answer-1));
-            questionCorrect = true;
-        }
-        else{
-            System.out.println("[[ "+points.get(answer-1)+" points ]]");
-            System.out.println(responses.get(answer-1));
         }
 
         if (isTest) {
             PointScore.addPoints(points.get(answer - 1));
         }
         questionAnswered = true;
+        updateAnswerBox();
     }
 }

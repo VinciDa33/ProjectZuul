@@ -1,24 +1,7 @@
 public class GameManager {
     private static GameManager instance;
-
-    private Room activeRoom;
-    private boolean isPlaying = false;
-
     private GameManager(){
         createRooms();
-    }
-
-    public void play(){
-        if(isPlaying)
-            return;
-
-        isPlaying = true;
-
-        while(isPlaying){
-            activeRoom.update();
-        }
-        System.out.print("Your final score was ");
-        PointScore.printScore();
     }
 
     public static GameManager getInstance() {
@@ -286,11 +269,7 @@ public class GameManager {
         goToRoom(introductionRoom);
     }
     public void goToRoom(Room room){
-        this.activeRoom = room;
-        activeRoom.onEnterRoom();
+        room.onEnterRoom();
     }
 
-    public void quitGame() {
-        isPlaying = false;
-    }
 }
