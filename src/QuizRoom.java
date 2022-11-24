@@ -1,15 +1,22 @@
+import javafx.animation.FillTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -25,6 +32,9 @@ public abstract class QuizRoom extends Room{
     Label responseLabel;
     VBox answerLabelBox;
     HBox answerBox;
+
+    //GUI ANIMATION
+    TranslateTransition swipeOutAnim;
 
     public void setSkipOnAnswer(boolean skipOnAnswer){
         this.skipOnAnswer = skipOnAnswer;
@@ -43,16 +53,33 @@ public abstract class QuizRoom extends Room{
     @Override
     public Scene createGUI() {
         //Setting up the main boxes for holding components
-        VBox vertBox = new VBox();
-        vertBox.setBackground(new Background(new BackgroundFill(Color.rgb(30, 30, 30), CornerRadii.EMPTY, Insets.EMPTY)));
+        Group root = new Group();
+
+        //Animation stuff
+        Rectangle swipeRect = new Rectangle(0, 0, GUIManager.getSizeX(), GUIManager.getSizeY());
+        swipeRect.setFill(Color.rgb(20, 20, 20));
+
+        TranslateTransition swipeInAnim = new TranslateTransition();
+        swipeInAnim.setDuration(Duration.millis(1000));
+        swipeInAnim.setByY(-GUIManager.getSizeY());
+        swipeInAnim.setNode(swipeRect);
+        swipeInAnim.play();
+
+        swipeOutAnim = new TranslateTransition();
+        swipeOutAnim.setDuration(Duration.millis(1000));
+        swipeOutAnim.setFromY(GUIManager.getSizeY());
+        swipeOutAnim.setByY(-GUIManager.getSizeY());
+        swipeOutAnim.setNode(swipeRect);
 
         HBox topBox = new HBox();
         topBox.setBackground(new Background(new BackgroundFill(Color.rgb(30, 30, 30), CornerRadii.EMPTY, Insets.EMPTY)));
         topBox.setPrefHeight(GUIManager.getSizeY()/4f*3);
 
         HBox bottomBox = new HBox();
-        bottomBox.setBackground(new Background(new BackgroundFill(Color.rgb(100, 50, 50), CornerRadii.EMPTY, Insets.EMPTY)));
+        bottomBox.setBackground(new Background(new BackgroundFill(Color.rgb(40, 40, 40), CornerRadii.EMPTY, Insets.EMPTY)));
         bottomBox.setPrefHeight(GUIManager.getSizeY()/4f);
+        bottomBox.setPrefWidth(GUIManager.getSizeX());
+        bottomBox.setLayoutY(GUIManager.getSizeY() * 0.75f);
         bottomBox.setAlignment(Pos.CENTER);
         bottomBox.setSpacing(10);
 
@@ -103,10 +130,11 @@ public abstract class QuizRoom extends Room{
         topBox.getChildren().add(leftBox);
         topBox.getChildren().add(rightBox);
 
-        vertBox.getChildren().add(topBox);
-        vertBox.getChildren().add(bottomBox);
+        root.getChildren().add(topBox);
+        root.getChildren().add(bottomBox);
+        root.getChildren().add(swipeRect);
 
-        return new Scene(vertBox, GUIManager.getSizeX(), GUIManager.getSizeY());
+        return new Scene(root, GUIManager.getSizeX(), GUIManager.getSizeY());
     }
 
     public void updateAnswerBox() {
@@ -120,7 +148,11 @@ public abstract class QuizRoom extends Room{
                 button.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
-                        GameManager.getInstance().goToRoom(exits.get(key));
+                        swipeOutAnim.play();
+                        Timeline exitTimer = new Timeline(
+                                new KeyFrame(swipeOutAnim.getDuration(), event -> GameManager.getInstance().goToRoom(exits.get(key)))
+                        );
+                        exitTimer.play();
                     }
                 });
                 button.setPrefSize(160, 80);
