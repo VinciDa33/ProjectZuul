@@ -31,7 +31,7 @@ public class GameManager {
                 "You will get options to each question " +
                         "where you will select the one you think is right. " +
                         "At the end you would be getting a score fitting for your answers");
-        introductionRoom.setImage("Img/WorkshopBackground2.jpg");
+        introductionRoom.setImage("Img/TempCrop.png");
         playedBeforeRoom = new InfoRoom("Have you played before?");
         hubRoom = new InfoRoom("Welcome to the learning hub");
         courseStartRoom = new InfoRoom("This is a short course, and it will teach you the basics of repairing");

@@ -85,7 +85,7 @@ public abstract class QuizRoom extends Room{
         bottomBox.setAlignment(Pos.CENTER);
         bottomBox.setSpacing(10);
 
-        Image image = new Image("Img/QuestionAnswerBackground.png", GUIManager.getSizeX(), Math.round(GUIManager.getSizeY()/4f), false, false);
+        Image image = new Image("Img/QuestionAnswerBackground2.png", GUIManager.getSizeX(), Math.round(GUIManager.getSizeY()/4f), false, false);
         BackgroundImage bgImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Background bg = new Background(bgImage);
         bottomBox.setBackground(bg);

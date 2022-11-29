@@ -71,6 +71,11 @@ public class InfoRoom extends Room{
         rightBox.setAlignment(Pos.CENTER);
         rightBox.setSpacing(10);
 
+        Image image = new Image("Img/NavigationBackground.png", GUIManager.getSizeX()/4f, Math.round(GUIManager.getSizeY()), false, false);
+        BackgroundImage bgImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background bg = new Background(bgImage);
+        rightBox.setBackground(bg);
+
         //The label with the description
         Label descriptionLabel = new Label(description);
         descriptionLabel.setTextFill(Color.rgb(220, 220, 220));
@@ -100,6 +105,7 @@ public class InfoRoom extends Room{
                 }
             });
             button.setPrefSize(240, 80);
+            button.setLayoutX(50);
             button.setFont(Font.font("Verdana", 24));
             rightBox.getChildren().add(button);
         }
