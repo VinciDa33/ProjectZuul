@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -19,6 +20,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class QuizRoom extends Room{
     String question;
@@ -76,12 +78,17 @@ public abstract class QuizRoom extends Room{
         topBox.setPrefHeight(GUIManager.getSizeY()/4f*3);
 
         HBox bottomBox = new HBox();
-        bottomBox.setBackground(new Background(new BackgroundFill(Color.rgb(40, 40, 40), CornerRadii.EMPTY, Insets.EMPTY)));
+        bottomBox.setBackground(new Background(new BackgroundFill(Color.rgb(40, 40, 40, 0), CornerRadii.EMPTY, Insets.EMPTY)));
         bottomBox.setPrefHeight(GUIManager.getSizeY()/4f);
         bottomBox.setPrefWidth(GUIManager.getSizeX());
         bottomBox.setLayoutY(GUIManager.getSizeY() * 0.75f);
         bottomBox.setAlignment(Pos.CENTER);
         bottomBox.setSpacing(10);
+
+        Image image = new Image("Img/QuestionAnswerBackground.png", GUIManager.getSizeX(), Math.round(GUIManager.getSizeY()/4f), false, false);
+        BackgroundImage bgImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Background bg = new Background(bgImage);
+        bottomBox.setBackground(bg);
 
         VBox leftBox = new VBox();
         leftBox.setBackground(new Background(new BackgroundFill(Color.rgb(50, 50, 50), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -149,10 +156,12 @@ public abstract class QuizRoom extends Room{
                     @Override
                     public void handle(ActionEvent actionEvent) {
                         swipeOutAnim.play();
-                        Timeline exitTimer = new Timeline(
-                                new KeyFrame(swipeOutAnim.getDuration(), event -> GameManager.getInstance().goToRoom(exits.get(key)))
-                        );
-                        exitTimer.play();
+                        swipeOutAnim.setOnFinished(e -> GameManager.getInstance().goToRoom(exits.get(key)));
+
+                        //Sound handling
+                        Random r = new Random();
+                        AudioClip clickSound = new AudioClip(this.getClass().getResource("Audio/" + defaultClickSounds[r.nextInt(defaultClickSounds.length)]).toString());
+                        clickSound.play();
                     }
                 });
                 button.setPrefSize(160, 80);

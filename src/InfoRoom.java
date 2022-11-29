@@ -1,6 +1,4 @@
 import javafx.animation.FillTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -11,11 +9,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+
+import java.util.Random;
+
 public class InfoRoom extends Room{
     String description;
 
@@ -41,6 +43,7 @@ public class InfoRoom extends Room{
         fadeInAnim.setDuration(Duration.millis(1000));
         fadeInAnim.setToValue(Color.rgb(20, 20, 20, 0));
         fadeInAnim.setShape(fadeRect);
+        fadeInAnim.setOnFinished(e -> fadeRect.setDisable(true));
         fadeInAnim.play();
 
         FillTransition fadeOutAnim = new FillTransition();
@@ -86,10 +89,13 @@ public class InfoRoom extends Room{
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     fadeOutAnim.play();
-                    Timeline exitTimer = new Timeline(
-                            new KeyFrame(fadeOutAnim.getDuration(), event -> GameManager.getInstance().goToRoom(exits.get(key)))
-                    );
-                    exitTimer.play();
+                    fadeOutAnim.setOnFinished(e -> GameManager.getInstance().goToRoom(exits.get(key)));
+
+                    //Sound handling
+                    Random r = new Random();
+                    AudioClip clickSound = new AudioClip(this.getClass().getResource("Audio/" + defaultClickSounds[r.nextInt(defaultClickSounds.length)]).toString());
+                    clickSound.play();
+
                     //GameManager.getInstance().goToRoom(exits.get(key));
                 }
             });
@@ -114,12 +120,6 @@ public class InfoRoom extends Room{
         //Adding components to main component and returning scene
         root.getChildren().add(leftBox);
         root.getChildren().add(rightBox);
-
-
-        Timeline fade = new Timeline(
-            new KeyFrame(fadeInAnim.getDuration(), event -> fadeRect.setDisable(true))
-        );
-        fade.play();
 
         root.getChildren().add(fadeRect);
 
