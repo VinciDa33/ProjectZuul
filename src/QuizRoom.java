@@ -16,6 +16,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 
@@ -85,7 +86,7 @@ public abstract class QuizRoom extends Room{
         bottomBox.setAlignment(Pos.CENTER);
         bottomBox.setSpacing(10);
 
-        Image image = new Image("Img/QuestionAnswerBackground2.png", GUIManager.getSizeX(), Math.round(GUIManager.getSizeY()/4f), false, false);
+        Image image = new Image("Img/QuestionAnswerBackground.png", GUIManager.getSizeX(), Math.round(GUIManager.getSizeY()/4f), false, false);
         BackgroundImage bgImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Background bg = new Background(bgImage);
         bottomBox.setBackground(bg);
@@ -151,7 +152,7 @@ public abstract class QuizRoom extends Room{
         if (questionCorrect || (questionAnswered && skipOnAnswer)) {
             //Creates a button for each exit option in the room
             for (String key : exits.keySet()) {
-                Button button = new Button(key);
+                CustomButton button = new CustomButton(key);
                 button.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
@@ -165,7 +166,10 @@ public abstract class QuizRoom extends Room{
                     }
                 });
                 button.setPrefSize(160, 80);
-                button.setFont(Font.font("Verdana", 18));
+                button.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
+                button.setTextFill(Color.rgb(220, 215, 180));
+                button.setDefaultBackground("Img/ButtonImageSmall.png");
+                button.setOnHoverBackground("Img/ButtonImageHoverSmall.png");
                 answerBox.getChildren().add(button);
             }
         }
@@ -180,7 +184,7 @@ public abstract class QuizRoom extends Room{
                 answerLabelBox.getChildren().add(answerLabel);
 
                 int index = i;
-                Button button = new Button("Answer #" + (i+1));
+                CustomButton button = new CustomButton("Answer [" + (i+1) + "]");
                 button.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
@@ -188,13 +192,16 @@ public abstract class QuizRoom extends Room{
                     }
                 });
                 button.setPrefSize(160, 80);
-                button.setFont(Font.font("Verdana", 18));
+                button.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
+                button.setTextFill(Color.rgb(220, 215, 180));
+                button.setDefaultBackground("Img/ButtonImageSmall.png");
+                button.setOnHoverBackground("Img/ButtonImageHoverSmall.png");
                 answerBox.getChildren().add(button);
             }
         }
 
         //The quit game button
-        Button exitButton = new Button("Quit");
+        CustomButton exitButton = new CustomButton("Quit");
         exitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -202,7 +209,9 @@ public abstract class QuizRoom extends Room{
             }
         });
         exitButton.setPrefSize(160, 80);
-        exitButton.setFont(Font.font("Verdana", 24));
+        exitButton.setFont(Font.font("Verdana", FontWeight.BOLD, 24));
+        exitButton.setDefaultBackground("Img/ButtonImageSmall.png");
+        exitButton.setOnHoverBackground("Img/ButtonImageHoverSmall.png");
         answerBox.getChildren().add(exitButton);
     }
 }

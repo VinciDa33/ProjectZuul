@@ -33,6 +33,7 @@ public class GameManager {
                         "At the end you would be getting a score fitting for your answers");
         introductionRoom.setImage("Img/TempCrop.png");
         playedBeforeRoom = new InfoRoom("Have you played before?");
+        playedBeforeRoom.setImage("Img/TempCrop.png");
         hubRoom = new InfoRoom("Welcome to the learning hub");
         courseStartRoom = new InfoRoom("This is a short course, and it will teach you the basics of repairing");
 
