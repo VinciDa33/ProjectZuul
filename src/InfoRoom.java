@@ -42,13 +42,13 @@ public class InfoRoom extends Room{
         fadeRect.setDisable(true);
 
         FillTransition fadeInAnim = new FillTransition();
-        fadeInAnim.setDuration(Duration.millis(1000));
+        fadeInAnim.setDuration(Duration.millis(800));
         fadeInAnim.setToValue(Color.rgb(20, 20, 20, 0));
         fadeInAnim.setShape(fadeRect);
         fadeInAnim.play();
 
         FillTransition fadeOutAnim = new FillTransition();
-        fadeOutAnim.setDuration(Duration.millis(1000));
+        fadeOutAnim.setDuration(Duration.millis(800));
         fadeOutAnim.setToValue(Color.rgb(20, 20, 20, 1));
         fadeOutAnim.setShape(fadeRect);
 
@@ -70,6 +70,9 @@ public class InfoRoom extends Room{
         VBox innerLeftBox = new VBox();
         innerLeftBox.setBackground(new Background(new BackgroundFill(Color.rgb(30, 30, 30, 0.75f), new CornerRadii(10), Insets.EMPTY)));
         innerLeftBox.setMaxWidth(GUIManager.getSizeX()/3f);
+        if (description.length() > 250)
+            innerLeftBox.setMaxWidth(GUIManager.getSizeX()/2f);
+        innerLeftBox.setMaxHeight(GUIManager.getSizeY() * 0.85f);
         innerLeftBox.setAlignment(Pos.TOP_LEFT);
         innerLeftBox.setPadding(new Insets(50, 50, 50, 50));
         leftBox.getChildren().add(innerLeftBox);
@@ -78,13 +81,13 @@ public class InfoRoom extends Room{
         TranslateTransition textSlideInAnim = new TranslateTransition();
         textSlideInAnim.setDuration(Duration.seconds(1f));
         textSlideInAnim.setFromX(-1200);
-        textSlideInAnim.setToX(80);
+        textSlideInAnim.setToX(50);
         textSlideInAnim.setNode(innerLeftBox);
         textSlideInAnim.play();
 
         TranslateTransition textSlideBounce = new TranslateTransition();
-        textSlideBounce.setDuration(Duration.seconds(0.15f));
-        textSlideBounce.setFromX(80);
+        textSlideBounce.setDuration(Duration.seconds(0.2f));
+        textSlideBounce.setFromX(50);
         textSlideBounce.setToX(0);
         textSlideBounce.setNode(innerLeftBox);
 
@@ -95,6 +98,8 @@ public class InfoRoom extends Room{
         descriptionLabel.setTextFill(Color.rgb(220, 220, 220));
         descriptionLabel.setWrapText(true);
         descriptionLabel.setFont(Font.font("Verdana", 24));
+        if (description.length() > 400)
+            descriptionLabel.setFont(Font.font("Verdana", 18));
         descriptionLabel.setTextAlignment(TextAlignment.LEFT);
 
         innerLeftBox.getChildren().add(descriptionLabel);
@@ -130,7 +135,7 @@ public class InfoRoom extends Room{
 
                     //Sound handling
                     Random r = new Random();
-                    AudioClip clickSound = new AudioClip(this.getClass().getResource("Audio/" + defaultClickSounds[r.nextInt(defaultClickSounds.length)]).toString());
+                    AudioClip clickSound = new AudioClip(this.getClass().getResource("Audio/" + CustomButton.defaultClickSounds[r.nextInt(CustomButton.defaultClickSounds.length)]).toString());
                     clickSound.play();
 
                     //GameManager.getInstance().goToRoom(exits.get(key));

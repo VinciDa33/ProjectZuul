@@ -101,6 +101,7 @@ public class GameManager {
                 "\n" +
                 "Step 11:\n" +
                 "Install the operating system and drivers for the components for optimal performance.");
+        computerInfoRoom.setImage("Img/TempCrop.png");
         sortingInfoRoom = new InfoRoom("If you deem reparation too hard, but still want to recycle your electronics as best as possible,\n" +
                                                 "there are still some options to keep in mind.\n" +
                                                 "- Take it to a recycler" +

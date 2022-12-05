@@ -6,12 +6,6 @@ import java.util.HashMap;
 public abstract class Room {
     HashMap<String, Room> exits = new HashMap<String, Room>();
     String imageString;
-    String[] defaultClickSounds = {
-            "ClickSound1.wav",
-            "ClickSound2.wav",
-            "ClickSound3.wav",
-            "ClickSound4.wav"
-    };
 
     public void setExit(String key, Room room){
         exits.put(key,room);

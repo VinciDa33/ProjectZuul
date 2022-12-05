@@ -33,8 +33,10 @@ public abstract class QuizRoom extends Room{
 
     //GUI RELATED VARIABLES
     Label responseLabel;
-    VBox answerLabelBox;
+
     HBox answerBox;
+    VBox answerLabelBox;
+    HBox activeBottomBox;
 
     //GUI ANIMATION
     TranslateTransition swipeOutAnim;
@@ -63,13 +65,13 @@ public abstract class QuizRoom extends Room{
         swipeRect.setFill(Color.rgb(20, 20, 20));
 
         TranslateTransition swipeInAnim = new TranslateTransition();
-        swipeInAnim.setDuration(Duration.millis(1000));
+        swipeInAnim.setDuration(Duration.millis(800));
         swipeInAnim.setByY(-GUIManager.getSizeY());
         swipeInAnim.setNode(swipeRect);
         swipeInAnim.play();
 
         swipeOutAnim = new TranslateTransition();
-        swipeOutAnim.setDuration(Duration.millis(1000));
+        swipeOutAnim.setDuration(Duration.millis(800));
         swipeOutAnim.setFromY(GUIManager.getSizeY());
         swipeOutAnim.setByY(-GUIManager.getSizeY());
         swipeOutAnim.setNode(swipeRect);
@@ -78,23 +80,101 @@ public abstract class QuizRoom extends Room{
         topBox.setBackground(new Background(new BackgroundFill(Color.rgb(30, 30, 30), CornerRadii.EMPTY, Insets.EMPTY)));
         topBox.setPrefHeight(GUIManager.getSizeY()/4f*3);
 
-        HBox bottomBox = new HBox();
-        bottomBox.setBackground(new Background(new BackgroundFill(Color.rgb(40, 40, 40, 0), CornerRadii.EMPTY, Insets.EMPTY)));
-        bottomBox.setPrefHeight(GUIManager.getSizeY()/4f);
-        bottomBox.setPrefWidth(GUIManager.getSizeX());
-        bottomBox.setLayoutY(GUIManager.getSizeY() * 0.75f);
-        bottomBox.setAlignment(Pos.CENTER);
-        bottomBox.setSpacing(10);
+
+        answerLabelBox = new VBox();
+        answerLabelBox.setBackground(new Background(new BackgroundFill(Color.rgb(185, 170, 125), CornerRadii.EMPTY, Insets.EMPTY)));
+        answerLabelBox.setPrefWidth(GUIManager.getSizeX()/2f);
+        answerLabelBox.setAlignment(Pos.TOP_LEFT);
+        answerLabelBox.setSpacing(15);
+        answerLabelBox.setPadding(new Insets(50, 0, 0, 50));
+
+
+        //Answer panel
+        answerBox = new HBox();
+        answerBox.setBackground(new Background(new BackgroundFill(Color.rgb(40, 40, 40, 0), CornerRadii.EMPTY, Insets.EMPTY)));
+        answerBox.setPrefHeight(GUIManager.getSizeY()/4f);
+        answerBox.setPrefWidth(GUIManager.getSizeX());
+        answerBox.setLayoutY(GUIManager.getSizeY() * 0.75f);
+        answerBox.setAlignment(Pos.CENTER);
+        answerBox.setSpacing(10);
 
         Image image = new Image("Img/QuestionAnswerBackground.png", GUIManager.getSizeX(), Math.round(GUIManager.getSizeY()/4f), false, false);
         BackgroundImage bgImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         Background bg = new Background(bgImage);
-        bottomBox.setBackground(bg);
+        answerBox.setBackground(bg);
+
+        //Creates a label and a button for each answer option in the room
+        for (int i = 0; i < answers.size(); i++) {
+            VBox labelContainer = new VBox();
+            labelContainer.setBackground(new Background(new BackgroundFill(Color.rgb(30, 30, 30, 0.75f), new CornerRadii(10), Insets.EMPTY)));
+            labelContainer.setMaxWidth(GUIManager.getSizeX() / 2f * 0.8f);
+            labelContainer.setAlignment(Pos.TOP_LEFT);
+            labelContainer.setPadding(new Insets(30, 50, 30, 50));
+
+            Label answerLabel = new Label("[" + (i+1) + "] " + answers.get(i));
+            answerLabel.setTextFill(Color.rgb(220, 220, 220));
+            answerLabel.setFont(Font.font("Verdana", 18));
+            answerLabel.setTextAlignment(TextAlignment.LEFT);
+            answerLabel.setWrapText(true);
+            labelContainer.getChildren().add(answerLabel);
+
+            TranslateTransition offset = new TranslateTransition();
+            offset.setDuration(Duration.millis(1));
+            offset.setFromX(0);
+            offset.setToX(1000);
+            offset.setNode(labelContainer);
+            offset.play();
+
+            TranslateTransition labelAnim = new TranslateTransition();
+            labelAnim.setDuration(Duration.seconds(1));
+            labelAnim.setFromX(1000);
+            labelAnim.setToX(0);
+            labelAnim.setNode(labelContainer);
+            Timeline delay = new Timeline(new KeyFrame(Duration.seconds(0.3 * (i+1)), e -> labelAnim.play()));
+            delay.play();
+            answerLabelBox.getChildren().add(labelContainer);
+
+            int index = i;
+            CustomButton button = new CustomButton("Answer [" + (i+1) + "]");
+            button.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    answerQuestion(index);
+
+                    //Sound handling
+                    Random r = new Random();
+                    AudioClip clickSound = new AudioClip(this.getClass().getResource("Audio/" + CustomButton.defaultClickSounds[r.nextInt(CustomButton.defaultClickSounds.length)]).toString());
+                    clickSound.play();
+                }
+            });
+            button.setPrefSize(160, 80);
+            button.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
+            button.setTextFill(Color.rgb(220, 215, 180));
+            button.setDefaultBackground("Img/ButtonImageSmall.png");
+            button.setOnHoverBackground("Img/ButtonImageHoverSmall.png");
+            answerBox.getChildren().add(button);
+        }
+
+        //The quit game button
+        CustomButton exitButton = new CustomButton("Quit");
+        exitButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                GUIManager.quitGame();
+            }
+        });
+        exitButton.setPrefSize(160, 80);
+        exitButton.setFont(Font.font("Verdana", FontWeight.BOLD, 24));
+        exitButton.setDefaultBackground("Img/ButtonImageSmall.png");
+        exitButton.setOnHoverBackground("Img/ButtonImageHoverSmall.png");
+        answerBox.getChildren().add(exitButton);
+
 
         VBox leftBox = new VBox();
         leftBox.setBackground(new Background(new BackgroundFill(Color.rgb(50, 50, 50), CornerRadii.EMPTY, Insets.EMPTY)));
         leftBox.setPrefWidth(GUIManager.getSizeX()/2f);
         leftBox.setAlignment(Pos.TOP_CENTER);
+        leftBox.setPadding(new Insets(0, 50, 0, 50));
 
         if (imageString != null) {
             Image backImg = new Image(imageString, 640, 540, false, false);
@@ -102,16 +182,6 @@ public abstract class QuizRoom extends Room{
             Background bGround = new Background(bImg);
             leftBox.setBackground(bGround);
         }
-
-        VBox rightBox = new VBox();
-        rightBox.setBackground(new Background(new BackgroundFill(Color.rgb(50, 50, 50), CornerRadii.EMPTY, Insets.EMPTY)));
-        rightBox.setPrefWidth(GUIManager.getSizeX()/2f);
-        rightBox.setAlignment(Pos.TOP_CENTER);
-        rightBox.setSpacing(15);
-        rightBox.setPadding(new Insets(50, 0, 0, 0));
-
-        answerBox = bottomBox;
-        answerLabelBox = rightBox;
 
         //The label with the description
         Label questionLabel = new Label("--- Question ---\n\n" + question);
@@ -136,20 +206,21 @@ public abstract class QuizRoom extends Room{
 
         //Adding components to main component and returning scene
         topBox.getChildren().add(leftBox);
-        topBox.getChildren().add(rightBox);
+        topBox.getChildren().add(answerLabelBox);
+
+        activeBottomBox = answerBox;
 
         root.getChildren().add(topBox);
-        root.getChildren().add(bottomBox);
+        root.getChildren().add(activeBottomBox);
         root.getChildren().add(swipeRect);
 
         return new Scene(root, GUIManager.getSizeX(), GUIManager.getSizeY());
     }
 
     public void updateAnswerBox() {
-        answerBox.getChildren().clear();
-        answerLabelBox.getChildren().clear();
-
         if (questionCorrect || (questionAnswered && skipOnAnswer)) {
+            answerBox.getChildren().clear();
+
             //Creates a button for each exit option in the room
             for (String key : exits.keySet()) {
                 CustomButton button = new CustomButton(key);
@@ -161,7 +232,7 @@ public abstract class QuizRoom extends Room{
 
                         //Sound handling
                         Random r = new Random();
-                        AudioClip clickSound = new AudioClip(this.getClass().getResource("Audio/" + defaultClickSounds[r.nextInt(defaultClickSounds.length)]).toString());
+                        AudioClip clickSound = new AudioClip(this.getClass().getResource("Audio/" + CustomButton.defaultClickSounds[r.nextInt(CustomButton.defaultClickSounds.length)]).toString());
                         clickSound.play();
                     }
                 });
@@ -172,46 +243,20 @@ public abstract class QuizRoom extends Room{
                 button.setOnHoverBackground("Img/ButtonImageHoverSmall.png");
                 answerBox.getChildren().add(button);
             }
-        }
-        else {
-            //Creates a label and a button for each answer option in the room
-            for (int i = 0; i < answers.size(); i++) {
-                Label answerLabel = new Label("[" + (i+1) + "] " + answers.get(i));
-                answerLabel.setTextFill(Color.rgb(220, 220, 220));
-                answerLabel.setFont(Font.font("Verdana", 18));
-                answerLabel.setTextAlignment(TextAlignment.CENTER);
-                answerLabel.setWrapText(true);
-                answerLabelBox.getChildren().add(answerLabel);
 
-                int index = i;
-                CustomButton button = new CustomButton("Answer [" + (i+1) + "]");
-                button.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent actionEvent) {
-                        answerQuestion(index);
-                    }
-                });
-                button.setPrefSize(160, 80);
-                button.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
-                button.setTextFill(Color.rgb(220, 215, 180));
-                button.setDefaultBackground("Img/ButtonImageSmall.png");
-                button.setOnHoverBackground("Img/ButtonImageHoverSmall.png");
-                answerBox.getChildren().add(button);
-            }
+            //The quit game button
+            CustomButton exitButton = new CustomButton("Quit");
+            exitButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    GUIManager.quitGame();
+                }
+            });
+            exitButton.setPrefSize(160, 80);
+            exitButton.setFont(Font.font("Verdana", FontWeight.BOLD, 24));
+            exitButton.setDefaultBackground("Img/ButtonImageSmall.png");
+            exitButton.setOnHoverBackground("Img/ButtonImageHoverSmall.png");
+            answerBox.getChildren().add(exitButton);
         }
-
-        //The quit game button
-        CustomButton exitButton = new CustomButton("Quit");
-        exitButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                GUIManager.quitGame();
-            }
-        });
-        exitButton.setPrefSize(160, 80);
-        exitButton.setFont(Font.font("Verdana", FontWeight.BOLD, 24));
-        exitButton.setDefaultBackground("Img/ButtonImageSmall.png");
-        exitButton.setOnHoverBackground("Img/ButtonImageHoverSmall.png");
-        answerBox.getChildren().add(exitButton);
     }
 }
