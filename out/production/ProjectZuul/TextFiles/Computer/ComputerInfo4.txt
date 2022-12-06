@@ -1,0 +1,17 @@
+Trin 9:
+Tænd computeren for at sikre at alt virker, hvis ikke dobbelttjek at alt er monteret korrekt og forbundet rigtigt.
+
+Trin 10:
+Det er en god ide at lave kabelhåndtering for at gøre plads i kabinettet. De fleste kabinetter har mere plads på bagsiden til kabler.
+Organisering af disse kabler tillader til at lave ændringer med færre problemer senere.
+
+Trin 11:
+Installer styresystemet og drivere for computerens enheder for bedste ydeevne.
+~Step 9:
+Turn on the PC to make sure everything works. If not double check that everything is mounted and plugged in correctly.
+
+Step 10:
+It is a good idea to do some cable management to clear up some room the case. Most cases will have space in the back for cables. Organizing these cables will also allow you to make changes easier later, as well as optimize airflow.
+
+Step 11:
+Install the operating system and drivers for the components for optimal performance.

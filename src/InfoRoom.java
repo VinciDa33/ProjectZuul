@@ -22,6 +22,7 @@ import java.util.Random;
 public class InfoRoom extends Room{
     String description;
     private boolean isLanguageToggleRoom = false;
+    private boolean isPointScoreRoom = false;
 
     public InfoRoom(String roomDataPath) {
         super(roomDataPath);
@@ -29,7 +30,7 @@ public class InfoRoom extends Room{
 
     @Override
     public void onEnterRoom(){
-        if (description == null)
+        if (!isPointScoreRoom)
             description = FileReader.loadFile(roomDataPath);
         GUIManager.setScene(createGUI());
 
@@ -96,6 +97,7 @@ public class InfoRoom extends Room{
             toggleButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
+                    description = null;
                     FileReader.toggleLanguage();
                 }
             });
@@ -128,7 +130,7 @@ public class InfoRoom extends Room{
         descriptionLabel.setTextFill(Color.rgb(220, 220, 220));
         descriptionLabel.setWrapText(true);
         descriptionLabel.setFont(Font.font("Verdana", 24));
-        if (description.length() > 400)
+        if (description.length() > 600)
             descriptionLabel.setFont(Font.font("Verdana", 16));
         descriptionLabel.setTextAlignment(TextAlignment.LEFT);
 
@@ -200,5 +202,8 @@ public class InfoRoom extends Room{
 
     public void setLanguageToggleRoom(boolean b) {
         isLanguageToggleRoom = b;
+    }
+    public void setPointScoreRoom(boolean b) {
+        isPointScoreRoom = b;
     }
 }

@@ -1,0 +1,4 @@
+Når man fejlsøger sin computer eller andre komponenter, sker en af de mest basale fejler ved kablerne. Det kan være alt fra at tilslutte dit hardware til strømmen eller fejl i kablerne, hvilket kan ende med brænd. Derfor er det vigtigt at kunne vedligeholde kabler. Det er god praksis altid at holde sine kabler under mindst muligt tryk, så de ikke bøjer/brækker, Samtidig skal man også holde øje med at kablerne ikke viser kobberledninger gennem isoleringen, hvilket kan være farligt.
+~When troubleshooting your computer or other components, one of the most common mistakes begins with the cables.
+It can be everything from not connecting your hardware properly to outright faulty cables or misplacement, which in extreme cases can cause fires. Therefore its important to be able to maintain cables.
+A good practice is to always to keep your cables under as little tension as possible for them to not bend/break, and to keep them clean and checking for no visible copper wires.

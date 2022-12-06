@@ -22,7 +22,7 @@ public class PointQuizRoom extends QuizRoom{
 
     @Override
     public void answerQuestion(int answer) {
-        responseLabel.setText("\n[[ " + points.get(answer) + " " +  FileReader.loadFile("Misc/Points") + " ]]\n\n" + responses.get(answer));
+        responseLabel.setText("\n[[ " + points.get(answer) + " " +  FileReader.loadFile("Misc/Points") + " ]]\n\n" + FileReader.loadFile(responses.get(answer)));
         if (points.get(answer) == 100) {
             questionCorrect = true;
 

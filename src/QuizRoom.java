@@ -115,7 +115,7 @@ public abstract class QuizRoom extends Room{
             labelContainer.setAlignment(Pos.TOP_LEFT);
             labelContainer.setPadding(new Insets(30, 50, 30, 50));
 
-            Label answerLabel = new Label("[" + (i+1) + "] " + answers.get(i));
+            Label answerLabel = new Label("[" + (i+1) + "] " + FileReader.loadFile(answers.get(i)));
             answerLabel.setTextFill(Color.rgb(220, 220, 220));
             answerLabel.setFont(Font.font("Verdana", 18));
             answerLabel.setTextAlignment(TextAlignment.LEFT);
@@ -139,7 +139,7 @@ public abstract class QuizRoom extends Room{
             answerLabelBox.getChildren().add(labelContainer);
 
             int index = i;
-            CustomButton button = new CustomButton(FileReader.loadFile("AnswerButton") + " [" + (i+1) + "]");
+            CustomButton button = new CustomButton(FileReader.loadFile("Misc/AnswerButton") + " [" + (i+1) + "]");
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
@@ -192,11 +192,11 @@ public abstract class QuizRoom extends Room{
         innerLeftBox.setBackground(new Background(new BackgroundFill(Color.rgb(30, 30, 30, 0.75f), new CornerRadii(10), Insets.EMPTY)));
         innerLeftBox.setPadding(new Insets(20, 20, 20, 20));
         innerLeftBox.setMaxWidth(GUIManager.getSizeX()/2 * 0.8f);
-        innerLeftBox.setAlignment(Pos.TOP_LEFT);
+        innerLeftBox.setAlignment(Pos.TOP_CENTER);
         leftBox.getChildren().add(innerLeftBox);
 
         //The label with the description
-        Label questionLabel = new Label("< Question >\n\n" + question);
+        Label questionLabel = new Label("< " + FileReader.loadFile("Misc/QuestionHeader") + " >\n\n" + question);
         questionLabel.setTextFill(Color.rgb(220, 220, 220));
         questionLabel.setFont(Font.font("Verdana", 22));
         questionLabel.setTextAlignment(TextAlignment.CENTER);
