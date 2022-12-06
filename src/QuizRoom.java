@@ -1,4 +1,3 @@
-import javafx.animation.FillTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
@@ -8,7 +7,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -174,7 +172,8 @@ public abstract class QuizRoom extends Room{
         leftBox.setBackground(new Background(new BackgroundFill(Color.rgb(50, 50, 50), CornerRadii.EMPTY, Insets.EMPTY)));
         leftBox.setPrefWidth(GUIManager.getSizeX()/2f);
         leftBox.setAlignment(Pos.TOP_CENTER);
-        leftBox.setPadding(new Insets(0, 50, 0, 50));
+        leftBox.setPadding(new Insets(50, 50, 50, 50));
+        leftBox.setSpacing(50);
 
         if (imageString != null) {
             Image backImg = new Image(imageString, 640, 540, false, false);
@@ -183,22 +182,34 @@ public abstract class QuizRoom extends Room{
             leftBox.setBackground(bGround);
         }
 
+        VBox innerLeftBox = new VBox();
+        innerLeftBox.setBackground(new Background(new BackgroundFill(Color.rgb(30, 30, 30, 0.75f), new CornerRadii(10), Insets.EMPTY)));
+        innerLeftBox.setPadding(new Insets(20, 20, 20, 20));
+        innerLeftBox.setMaxWidth(GUIManager.getSizeX()/2 * 0.8f);
+        innerLeftBox.setAlignment(Pos.TOP_LEFT);
+        leftBox.getChildren().add(innerLeftBox);
+
         //The label with the description
         Label questionLabel = new Label("--- Question ---\n\n" + question);
         questionLabel.setTextFill(Color.rgb(220, 220, 220));
-        questionLabel.setPadding(new Insets(50, 0, 0, 0));
-        questionLabel.setFont(Font.font("Verdana", 28));
+        questionLabel.setFont(Font.font("Verdana", 22));
         questionLabel.setTextAlignment(TextAlignment.CENTER);
         questionLabel.setWrapText(true);
-        leftBox.getChildren().add(questionLabel);
+        innerLeftBox.getChildren().add(questionLabel);
+
+        VBox innerResponseBox = new VBox();
+        innerResponseBox.setBackground(new Background(new BackgroundFill(Color.rgb(30, 30, 30, 0.75f), new CornerRadii(10), Insets.EMPTY)));
+        innerResponseBox.setPadding(new Insets(10, 20, 20, 20));
+        innerResponseBox.setMaxWidth(GUIManager.getSizeX()/2 * 0.8f);
+        innerResponseBox.setAlignment(Pos.TOP_LEFT);
+        leftBox.getChildren().add(innerResponseBox);
 
         responseLabel = new Label();
         responseLabel.setTextFill(Color.rgb(220, 220, 220));
-        responseLabel.setPadding(new Insets(50, 0, 0, 0));
-        responseLabel.setFont(Font.font("Verdana", 22));
+        responseLabel.setFont(Font.font("Verdana", 14));
         responseLabel.setTextAlignment(TextAlignment.CENTER);
         responseLabel.setWrapText(true);
-        leftBox.getChildren().add(responseLabel);
+        innerResponseBox.getChildren().add(responseLabel);
 
         //Creates a label and a button for each answer option in the room
         updateAnswerBox();

@@ -31,6 +31,10 @@ public class InfoRoom extends Room{
         GUIManager.setScene(createGUI());
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public Scene createGUI() {
         //Setting up the main boxes for holding components
@@ -99,7 +103,7 @@ public class InfoRoom extends Room{
         descriptionLabel.setWrapText(true);
         descriptionLabel.setFont(Font.font("Verdana", 24));
         if (description.length() > 400)
-            descriptionLabel.setFont(Font.font("Verdana", 18));
+            descriptionLabel.setFont(Font.font("Verdana", 16));
         descriptionLabel.setTextAlignment(TextAlignment.LEFT);
 
         innerLeftBox.getChildren().add(descriptionLabel);

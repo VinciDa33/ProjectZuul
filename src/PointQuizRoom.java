@@ -27,6 +27,7 @@ public class PointQuizRoom extends QuizRoom{
 
         if (isTest) {
             PointScore.addPoints(points.get(answer));
+            GameManager.getInstance().updatePointScoreRoom();
         }
         questionAnswered = true;
 
