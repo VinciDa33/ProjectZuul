@@ -10,10 +10,9 @@ public class CustomButton extends Button {
     String onHoverBackground = "Img/ButtonImageHover.png";
 
     static String[] defaultClickSounds = {
-            "ClickSound1.wav",
-            "ClickSound2.wav",
-            "ClickSound3.wav",
-            "ClickSound4.wav"
+            "SimpleClickSound1.wav",
+            "SimpleClickSound2.wav",
+            "SimpleClickSound3.wav",
     };
 
     public CustomButton(String text) {

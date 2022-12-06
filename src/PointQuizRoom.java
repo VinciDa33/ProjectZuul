@@ -1,3 +1,5 @@
+import javafx.scene.media.AudioClip;
+
 import java.util.ArrayList;
 
 public class PointQuizRoom extends QuizRoom{
@@ -23,6 +25,13 @@ public class PointQuizRoom extends QuizRoom{
         responseLabel.setText("\n[[ " + points.get(answer) + " points ]]\n\n" + responses.get(answer));
         if (points.get(answer) == 100) {
             questionCorrect = true;
+
+            AudioClip correctSound = new AudioClip(this.getClass().getResource("Audio/CorrectSound.wav").toString());
+            correctSound.play();
+        }
+        else {
+            AudioClip incorrectSound = new AudioClip(this.getClass().getResource("Audio/IncorrectSound.wav").toString());
+            incorrectSound.play();
         }
 
         if (isTest) {
