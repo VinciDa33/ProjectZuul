@@ -28,7 +28,7 @@ public class GameManager {
         PointQuizRoom solderingQuizPRoom1, cableQuizPRoom1;
 
         InfoRoom testIntroduction;
-        PointQuizRoom test1, test2, test3, test4, test5;
+        PointQuizRoom test1, test2, test3, test4;
 
 
 
@@ -143,6 +143,7 @@ public class GameManager {
                 "Cables/CableResponse12",
                 true
         );
+        cableQuizCRoom1.setImage("Img/CableSmall1.png");
 
 
         cableQuizPRoom1 = new PointQuizRoom("Cables/CableQuestion2");
@@ -158,6 +159,7 @@ public class GameManager {
                 "Cables/CableResponse23",
                 100
         );
+        cableQuizPRoom1.setImage("Img/CableSmall2.png");
 
 
         recyclingInfoRoom1 = new InfoRoom("Recycling/RecyclingInfo1");
@@ -179,6 +181,7 @@ public class GameManager {
                 "Recycling/RecyclingResponse13",
                 false
         );
+        recyclingQuizCRoom1.setImage("Img/RecycleSmall1.png");
 
         recyclingQuizCRoom2 = new CorrectQuizRoom("Recycling/RecyclingQuestion2");
         recyclingQuizCRoom2.addAnswer("Recycling/RecyclingAnswer21",
@@ -189,33 +192,56 @@ public class GameManager {
                 "Recycling/RecyclingResponse22",
                 false
         );
+        recyclingQuizCRoom2.setImage("Img/RecycleSmall2.png");
 
 
 
         testIntroduction = new InfoRoom("TestIntroduction");
         testIntroduction.setImage("Img/Full2.png");
 
-        test1 = new PointQuizRoom("Test1");
+        test1 = new PointQuizRoom("Test/Test1");
         test1.setTest(true);
         test1.setSkipOnAnswer(true);
         test1.setImage("Img/Computer4Small.png");
-        test1.addAnswer("After installing the GPU.",
-                "The GPU is the last thing you install", 0);
-        test1.addAnswer("After installing the CPU, cooler and RAM.",
-                "This is the best practice, and the easiest way to do it", 100);
-        test1.addAnswer("Before installing anything on the motherboard.",
-                "You can do it this way, though it is highly inconvenient.", 50);
+        test1.addAnswer("Test/TestAnswer11",
+                "Test/DefaultTestResponse", 0);
+        test1.addAnswer("Test/TestAnswer12",
+                "Test/DefaultTestResponse", 100);
+        test1.addAnswer("Test/TestAnswer13",
+                "Test/DefaultTestResponse", 50);
 
-        test2 = new PointQuizRoom("What tools will you need when soldering?");
+        test2 = new PointQuizRoom("Test/Test2");
         test2.setTest(true);
         test2.setSkipOnAnswer(true);
         test2.setImage("Img/Solder3Small.png");
-        test2.addAnswer("Solder, soldering iron and a soldering station.",
-                "Well done, These are the 3 main tools you will need.", 100);
-        test2.addAnswer("Solder, soldering iron and a power supply.",
-                "You should use a dedicated soldering station, not a power supply, though they both are meant for supplying power.", 50);
-        test2.addAnswer("Soldering iron, Copper wire and a power supply",
-                "You should use a dedicated soldering station instead of a power supply, and definitely no copper wire.", 0);
+        test2.addAnswer("Test/TestAnswer21",
+                "Test/DefaultTestResponse", 100);
+        test2.addAnswer("Test/TestAnswer22",
+                "Test/DefaultTestResponse", 50);
+        test2.addAnswer("Test/TestAnswer23",
+                "Test/DefaultTestResponse", 0);
+
+        test3 = new PointQuizRoom("Test/Test3");
+        test3.setTest(true);
+        test3.setSkipOnAnswer(true);
+        test3.setImage("Img/CableSmall2.png");
+        test3.addAnswer("Test/TestAnswer31",
+                "Test/DefaultTestResponse", 50);
+        test3.addAnswer("Test/TestAnswer32",
+                "Test/DefaultTestResponse", 100);
+        test3.addAnswer("Test/TestAnswer33",
+                "Test/DefaultTestResponse", 0);
+
+        test4 = new PointQuizRoom("Test/Test4");
+        test4.setTest(true);
+        test4.setSkipOnAnswer(true);
+        test4.setImage("Img/RecycleSmall2.png");
+        test4.addAnswer("Test/TestAnswer41",
+                "Test/DefaultTestResponse", 50);
+        test4.addAnswer("Test/TestAnswer42",
+                "Test/DefaultTestResponse", 0);
+        test4.addAnswer("Test/TestAnswer43",
+                "Test/DefaultTestResponse", 100);
 
 
         introductionRoom.setExit("Navigation/ContinueButton", hubRoom);
@@ -237,7 +263,7 @@ public class GameManager {
         computerQuizCRoom1.setExit("Navigation/ContinueButton", computerQuizCRoom2);
         computerQuizCRoom1.setExit("Navigation/BackButton", computerInfoRoom4);
         computerQuizCRoom2.setExit("Navigation/FinishButton", hubRoom);
-        computerQuizCRoom2.setExit("Navigation/BackButton", computerQuizCRoom2);
+        computerQuizCRoom2.setExit("Navigation/BackButton", computerQuizCRoom1);
 
         solderingInfoRoom1.setExit("Navigation/ContinueButton", solderingInfoRoom2);
         solderingInfoRoom1.setExit("Navigation/BackButton", hubRoom);
@@ -272,7 +298,10 @@ public class GameManager {
         testIntroduction.setExit("Navigation/BackButton", hubRoom);
 
         test1.setExit("Navigation/ContinueButton", test2);
-        test2.setExit("Navigation/ContinueButton", pointScoreRoom);
+        test2.setExit("Navigation/ContinueButton", test3);
+        test3.setExit("Navigation/ContinueButton", test4);
+        test4.setExit("Navigation/ContinueButton", pointScoreRoom);
+
 
         goToRoom(introductionRoom);
     }

@@ -34,7 +34,7 @@ public class InfoRoom extends Room{
             description = FileReader.loadFile(roomDataPath);
         GUIManager.setScene(createGUI());
 
-        if (PointScore.getPoints() >= 200) {
+        if (PointScore.getPoints() >= 400) {
             AudioClip correctSound = new AudioClip(GameManager.getInstance().getClass().getResource("Audio/SuperSuccess.wav").toString());
             correctSound.play();
         }
@@ -130,8 +130,10 @@ public class InfoRoom extends Room{
         descriptionLabel.setTextFill(Color.rgb(220, 220, 220));
         descriptionLabel.setWrapText(true);
         descriptionLabel.setFont(Font.font("Verdana", 24));
-        if (description.length() > 600)
+        if (description.length() > 700)
             descriptionLabel.setFont(Font.font("Verdana", 16));
+        else if (description.length() > 500)
+            descriptionLabel.setFont(Font.font("Verdana", 18));
         descriptionLabel.setTextAlignment(TextAlignment.LEFT);
 
         innerLeftBox.getChildren().add(descriptionLabel);
