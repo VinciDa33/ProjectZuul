@@ -1,3 +1,5 @@
+import javafx.scene.media.AudioClip;
+
 public class PointScore {
     private static int points;
     public static void addPoints(int pointScore){

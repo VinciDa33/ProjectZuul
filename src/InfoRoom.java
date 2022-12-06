@@ -29,6 +29,11 @@ public class InfoRoom extends Room{
     @Override
     public void onEnterRoom(){
         GUIManager.setScene(createGUI());
+
+        if (PointScore.getPoints() >= 200) {
+            AudioClip correctSound = new AudioClip(GameManager.getInstance().getClass().getResource("Audio/SuperSuccess.wav").toString());
+            correctSound.play();
+        }
     }
 
     public void setDescription(String description) {

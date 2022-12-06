@@ -33,6 +33,7 @@ public class GameManager {
 
 
         pointScoreRoom = new InfoRoom("Default Statement");
+        pointScoreRoom.setImage("Img/Full2.png");
 
         introductionRoom = new InfoRoom(
                 "Welcome to Repair Zuul. In this game you learn some basic repair skills.\n" +
@@ -217,6 +218,7 @@ public class GameManager {
                 " each question, after that the next question is up." +
                 "\nGood luck!"
         );
+        testIntroduction.setImage("Img/Full2.png");
 
         test1 = new PointQuizRoom("When should you mount the motherboard in the case?");
         test1.setTest(true);
@@ -276,6 +278,9 @@ public class GameManager {
         testIntroduction.setExit("Continue", test1);
         testIntroduction.setExit("Back", hubRoom);
 
+        test1.setExit("Continue", test2);
+        test2.setExit("Continue", pointScoreRoom);
+
         goToRoom(introductionRoom);
     }
     public void goToRoom(Room room){
@@ -284,6 +289,6 @@ public class GameManager {
     }
 
     public void updatePointScoreRoom() {
-        pointScoreRoom.setDescription("You have finished the test.\nYour final score was: " + PointScore.getPoints());
+        pointScoreRoom.setDescription("You have finished the test.\n\nYour final score was: " + PointScore.getPoints());
     }
 }
