@@ -39,6 +39,10 @@ public abstract class QuizRoom extends Room{
     //GUI ANIMATION
     TranslateTransition swipeOutAnim;
 
+    public QuizRoom(String roomDataPath) {
+        super(roomDataPath);
+    }
+
     public void setSkipOnAnswer(boolean skipOnAnswer){
         this.skipOnAnswer = skipOnAnswer;
     }
@@ -48,6 +52,8 @@ public abstract class QuizRoom extends Room{
     public void onEnterRoom() {
         questionCorrect = false;
         questionAnswered = false;
+
+        question = FileReader.loadFile(roomDataPath);
 
         GUIManager.setScene(createGUI());
     }
@@ -133,7 +139,7 @@ public abstract class QuizRoom extends Room{
             answerLabelBox.getChildren().add(labelContainer);
 
             int index = i;
-            CustomButton button = new CustomButton("Answer [" + (i+1) + "]");
+            CustomButton button = new CustomButton(FileReader.loadFile("AnswerButton") + " [" + (i+1) + "]");
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
@@ -154,7 +160,7 @@ public abstract class QuizRoom extends Room{
         }
 
         //The quit game button
-        CustomButton exitButton = new CustomButton("Quit");
+        CustomButton exitButton = new CustomButton(FileReader.loadFile("Navigation/QuitButton"));
         exitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -190,7 +196,7 @@ public abstract class QuizRoom extends Room{
         leftBox.getChildren().add(innerLeftBox);
 
         //The label with the description
-        Label questionLabel = new Label("--- Question ---\n\n" + question);
+        Label questionLabel = new Label("< Question >\n\n" + question);
         questionLabel.setTextFill(Color.rgb(220, 220, 220));
         questionLabel.setFont(Font.font("Verdana", 22));
         questionLabel.setTextAlignment(TextAlignment.CENTER);
@@ -202,6 +208,7 @@ public abstract class QuizRoom extends Room{
         innerResponseBox.setPadding(new Insets(10, 20, 20, 20));
         innerResponseBox.setMaxWidth(GUIManager.getSizeX()/2 * 0.8f);
         innerResponseBox.setAlignment(Pos.TOP_LEFT);
+        innerResponseBox.setAlignment(Pos.TOP_CENTER);
         leftBox.getChildren().add(innerResponseBox);
 
         responseLabel = new Label();
@@ -234,7 +241,7 @@ public abstract class QuizRoom extends Room{
 
             //Creates a button for each exit option in the room
             for (String key : exits.keySet()) {
-                CustomButton button = new CustomButton(key);
+                CustomButton button = new CustomButton(FileReader.loadFile(key));
                 button.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
@@ -256,7 +263,7 @@ public abstract class QuizRoom extends Room{
             }
 
             //The quit game button
-            CustomButton exitButton = new CustomButton("Quit");
+            CustomButton exitButton = new CustomButton(FileReader.loadFile("Navigation/QuitButton"));
             exitButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {

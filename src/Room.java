@@ -6,6 +6,11 @@ import java.util.HashMap;
 public abstract class Room {
     HashMap<String, Room> exits = new HashMap<String, Room>();
     String imageString;
+    String roomDataPath;
+
+    public Room(String roomDataPath) {
+        this.roomDataPath = roomDataPath;
+    }
 
     public void setExit(String key, Room room){
         exits.put(key,room);

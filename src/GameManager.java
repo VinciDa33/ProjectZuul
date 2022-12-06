@@ -6,6 +6,7 @@ public class GameManager {
         createRooms();
     }
     private InfoRoom pointScoreRoom;
+    private Room activeRoom;
 
     public static GameManager getInstance() {
         if (instance != null) {
@@ -35,22 +36,15 @@ public class GameManager {
         pointScoreRoom = new InfoRoom("Default Statement");
         pointScoreRoom.setImage("Img/Full2.png");
 
-        introductionRoom = new InfoRoom(
-                "Welcome to Repair Zuul. In this game you learn some basic repair skills.\n" +
-                        "Each course contains information about its topic, as well as a few questions for you to check what you have learned."
-        );
+        introductionRoom = new InfoRoom("Introduction");
         introductionRoom.setImage("Img/Full1.png");
+        introductionRoom.setLanguageToggleRoom(true);
 
-        hubRoom = new InfoRoom(
-                "This is the learning hub, choose a course or take the combined test, to check what you learned across all courses."
-        );
+        hubRoom = new InfoRoom("Hub");
         hubRoom.setImage("Img/Full3.png");
+        hubRoom.setLanguageToggleRoom(true);
 
-        computerInfoRoom1 = new InfoRoom(
-                "This room will teach you to assemble a computer with all parts of the PC in the easiest order.\n" +
-                        "When building a computer it is easiest to assemble most of the components on the motherboard before mounting the motherboard in the case, " +
-                        "however it is possible to mount the motherboard in the case beforehand, but it be more difficult with the limited space in the case."
-        );
+        computerInfoRoom1 = new InfoRoom("ComputerInfo1");
         computerInfoRoom1.setImage("Img/Computer1.png");
 
         computerInfoRoom2 = new InfoRoom(
@@ -214,13 +208,10 @@ public class GameManager {
 
 
 
-        testIntroduction = new InfoRoom("You are about to start the test. You will have 1 chance to answer" +
-                " each question, after that the next question is up." +
-                "\nGood luck!"
-        );
+        testIntroduction = new InfoRoom("TestIntroduction");
         testIntroduction.setImage("Img/Full2.png");
 
-        test1 = new PointQuizRoom("When should you mount the motherboard in the case?");
+        test1 = new PointQuizRoom("Test1");
         test1.setTest(true);
         test1.setSkipOnAnswer(true);
         test1.setImage("Img/Computer4Small.png");
@@ -243,52 +234,58 @@ public class GameManager {
                 "You should use a dedicated soldering station instead of a power supply, and definitely no copper wire.", 0);
 
 
-        introductionRoom.setExit("Continue", hubRoom);
+        introductionRoom.setExit("Navigation/ContinueButton", hubRoom);
 
-        hubRoom.setExit("Computer", computerInfoRoom1);
-        hubRoom.setExit("Soldering", solderingInfoRoom1);
-        hubRoom.setExit("Cables", cableInfoRoom1);
-        hubRoom.setExit("Recycling", recyclingInfoRoom1);
-        hubRoom.setExit("Scored Test", testIntroduction);
+        hubRoom.setExit("HubButtons/ComputerButton", computerInfoRoom1);
+        hubRoom.setExit("HubButtons/SolderingButton", solderingInfoRoom1);
+        hubRoom.setExit("HubButtons/CablesButton", cableInfoRoom1);
+        hubRoom.setExit("HubButtons/RecycleButton", recyclingInfoRoom1);
+        hubRoom.setExit("HubButtons/TestButton", testIntroduction);
 
-        computerInfoRoom1.setExit("Continue", computerInfoRoom2);
-        computerInfoRoom1.setExit("Back", hubRoom);
-        computerInfoRoom2.setExit("Continue", computerInfoRoom3);
-        computerInfoRoom2.setExit("Back", computerInfoRoom1);
-        computerInfoRoom3.setExit("Continue", computerInfoRoom4);
-        computerInfoRoom3.setExit("Back", computerInfoRoom2);
-        computerInfoRoom4.setExit("Continue", computerQuizCRoom1);
-        computerInfoRoom4.setExit("Back", computerInfoRoom3);
-        computerQuizCRoom1.setExit("Continue", computerQuizCRoom2);
-        computerQuizCRoom1.setExit("Back", computerInfoRoom4);
-        computerQuizCRoom2.setExit("Finish", hubRoom);
-        computerQuizCRoom2.setExit("Back", computerQuizCRoom2);
+        computerInfoRoom1.setExit("Navigation/ContinueButton", computerInfoRoom2);
+        computerInfoRoom1.setExit("Navigation/BackButton", hubRoom);
+        computerInfoRoom2.setExit("Navigation/ContinueButton", computerInfoRoom3);
+        computerInfoRoom2.setExit("Navigation/BackButton", computerInfoRoom1);
+        computerInfoRoom3.setExit("Navigation/ContinueButton", computerInfoRoom4);
+        computerInfoRoom3.setExit("Navigation/BackButton", computerInfoRoom2);
+        computerInfoRoom4.setExit("Navigation/ContinueButton", computerQuizCRoom1);
+        computerInfoRoom4.setExit("Navigation/BackButton", computerInfoRoom3);
+        computerQuizCRoom1.setExit("Navigation/ContinueButton", computerQuizCRoom2);
+        computerQuizCRoom1.setExit("Navigation/BackButton", computerInfoRoom4);
+        computerQuizCRoom2.setExit("Navigation/FinishButton", hubRoom);
+        computerQuizCRoom2.setExit("Navigation/BackButton", computerQuizCRoom2);
 
-        solderingInfoRoom1.setExit("Continue", solderingInfoRoom2);
-        solderingInfoRoom1.setExit("Back", hubRoom);
-        solderingInfoRoom2.setExit("Continue", solderingQuizCRoom1);
-        solderingInfoRoom2.setExit("Back", solderingInfoRoom1);
-        solderingQuizCRoom1.setExit("Continue", solderingQuizPRoom1);
-        solderingQuizCRoom1.setExit("Back", solderingInfoRoom2);
-        solderingQuizPRoom1.setExit("Finish", hubRoom);
-        solderingQuizPRoom1.setExit("Back", solderingQuizCRoom1);
+        solderingInfoRoom1.setExit("Navigation/ContinueButton", solderingInfoRoom2);
+        solderingInfoRoom1.setExit("Navigation/BackButton", hubRoom);
+        solderingInfoRoom2.setExit("Navigation/ContinueButton", solderingQuizCRoom1);
+        solderingInfoRoom2.setExit("Navigation/BackButton", solderingInfoRoom1);
+        solderingQuizCRoom1.setExit("Navigation/ContinueButton", solderingQuizPRoom1);
+        solderingQuizCRoom1.setExit("Navigation/BackButton", solderingInfoRoom2);
+        solderingQuizPRoom1.setExit("Navigation/FinishButton", hubRoom);
+        solderingQuizPRoom1.setExit("Navigation/BackButton", solderingQuizCRoom1);
 
-        recyclingInfoRoom1.setExit("Continue", recyclingInfoRoom2);
+        recyclingInfoRoom1.setExit("Navigation/ContinueButton", recyclingInfoRoom2);
 
-        testIntroduction.setExit("Continue", test1);
-        testIntroduction.setExit("Back", hubRoom);
+        testIntroduction.setExit("Navigation/ContinueButton", test1);
+        testIntroduction.setExit("Navigation/BackButton", hubRoom);
 
-        test1.setExit("Continue", test2);
-        test2.setExit("Continue", pointScoreRoom);
+        test1.setExit("Navigation/ContinueButton", test2);
+        test2.setExit("Navigation/ContinueButton", pointScoreRoom);
 
         goToRoom(introductionRoom);
     }
+
     public void goToRoom(Room room){
-        //this.activeRoom = room;
+        this.activeRoom = room;
         room.onEnterRoom();
     }
 
+    public Room getActiveRoom() {
+        return activeRoom;
+    }
+
     public void updatePointScoreRoom() {
-        pointScoreRoom.setDescription("You have finished the test.\n\nYour final score was: " + PointScore.getPoints());
+        System.out.println("!");
+        pointScoreRoom.setDescription(FileReader.loadFile("PointScore/PointScore") + PointScore.getPoints() + "]");
     }
 }

@@ -1,0 +1,7 @@
+Du har færdiggjort testen.
+
+Din endelige score var:
+[~You have finished the test.
+
+Your final score was:
+[

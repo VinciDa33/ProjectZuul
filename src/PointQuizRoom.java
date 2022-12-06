@@ -6,8 +6,8 @@ public class PointQuizRoom extends QuizRoom{
     private ArrayList<Integer> points = new ArrayList<>();
     private boolean isTest = false;
 
-    PointQuizRoom(String question){
-        this.question = question;
+    public PointQuizRoom(String roomDataPath){
+        super(roomDataPath);
     }
 
     public void addAnswer(String answer, String response, int score){
@@ -22,7 +22,7 @@ public class PointQuizRoom extends QuizRoom{
 
     @Override
     public void answerQuestion(int answer) {
-        responseLabel.setText("\n[[ " + points.get(answer) + " points ]]\n\n" + responses.get(answer));
+        responseLabel.setText("\n[[ " + points.get(answer) + " " +  FileReader.loadFile("Misc/Points") + " ]]\n\n" + responses.get(answer));
         if (points.get(answer) == 100) {
             questionCorrect = true;
 

@@ -21,13 +21,16 @@ import java.util.Random;
 
 public class InfoRoom extends Room{
     String description;
+    private boolean isLanguageToggleRoom = false;
 
-    public InfoRoom(String description) {
-        this.description = description;
+    public InfoRoom(String roomDataPath) {
+        super(roomDataPath);
     }
 
     @Override
     public void onEnterRoom(){
+        if (description == null)
+            description = FileReader.loadFile(roomDataPath);
         GUIManager.setScene(createGUI());
 
         if (PointScore.getPoints() >= 200) {
@@ -67,6 +70,7 @@ public class InfoRoom extends Room{
         leftBox.setPrefSize(GUIManager.getSizeX()/4f*3, GUIManager.getSizeY());
         leftBox.setAlignment(Pos.TOP_LEFT);
         leftBox.setPadding(new Insets(50, 0, 0, 50));
+        leftBox.setSpacing(20);
 
         if (imageString != null) {
             Image backImg = new Image(imageString, 960, 720, false, false);
@@ -74,6 +78,7 @@ public class InfoRoom extends Room{
             Background bGround = new Background(bImg);
             leftBox.setBackground(bGround);
         }
+
 
         //Inner left box for containing info room descriptions
         VBox innerLeftBox = new VBox();
@@ -85,6 +90,22 @@ public class InfoRoom extends Room{
         innerLeftBox.setAlignment(Pos.TOP_LEFT);
         innerLeftBox.setPadding(new Insets(50, 50, 50, 50));
         leftBox.getChildren().add(innerLeftBox);
+
+        if (isLanguageToggleRoom) {
+            CustomButton toggleButton = new CustomButton(FileReader.loadFile("ToggleButtonText"));
+            toggleButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    FileReader.toggleLanguage();
+                }
+            });
+            toggleButton.setPrefSize(160, 80);
+            toggleButton.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+            toggleButton.setTextFill(Color.rgb(220, 215, 180));
+            toggleButton.setDefaultBackground("Img/ButtonImageSmall.png");
+            toggleButton.setOnHoverBackground("Img/ButtonImageHoverSmall.png");
+            leftBox.getChildren().add(toggleButton);
+        }
 
         //Two animations for the slide in effect of the inner left box
         TranslateTransition textSlideInAnim = new TranslateTransition();
@@ -135,7 +156,7 @@ public class InfoRoom extends Room{
 
         //Creates a button for each exit option in the room
         for (String key : exits.keySet()) {
-            CustomButton button = new CustomButton(key);
+            CustomButton button = new CustomButton(FileReader.loadFile(key));
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
@@ -156,7 +177,7 @@ public class InfoRoom extends Room{
         }
 
         //The quit game button
-        CustomButton exitButton = new CustomButton("Quit");
+        CustomButton exitButton = new CustomButton(FileReader.loadFile("Navigation/QuitButton"));
         exitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -175,5 +196,9 @@ public class InfoRoom extends Room{
         root.getChildren().add(fadeRect);
 
         return new Scene(root, GUIManager.getSizeX(), GUIManager.getSizeY());
+    }
+
+    public void setLanguageToggleRoom(boolean b) {
+        isLanguageToggleRoom = b;
     }
 }
