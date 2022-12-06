@@ -57,36 +57,33 @@ public class GameManager {
         computerInfoRoom4 = new InfoRoom("Computer/ComputerInfo4");
         computerInfoRoom4.setImage("Img/Computer1.png");
 
-        computerQuizCRoom1 = new CorrectQuizRoom(
-                "What components should be mounted on the motherboard before inserting the motherboard in the PC?"
-        );
-        computerQuizCRoom1.addAnswer("Power supply, CPU and RAM sticks",
-                "The power supply most often has a specific slot in the case itself, therefore it should never be mounted on the motherboard.",
+        computerQuizCRoom1 = new CorrectQuizRoom("Computer/ComputerQuestion1");
+        computerQuizCRoom1.addAnswer("Computer/ComputerAnswer11",
+                "Computer/ComputerResponse11",
                 false
         );
-        computerQuizCRoom1.addAnswer("CPU-cooler, SATA drives, M.2 SSD and GPU",
-                "The CPU-cooler should never be mounted before the CPU, SATA drives are not installed on the motherboard, " +
-                        "and the GPU is fastened to both the motherboard and PC case, therefore it should be mounted after the motherboard after its inserted in the case",
+        computerQuizCRoom1.addAnswer("Computer/ComputerAnswer12",
+                "Computer/ComputerResponse12",
                 false
         );
-        computerQuizCRoom1.addAnswer("CPU, CPU-cooler, RAM sticks and M.2 SSD",
-                "Well done, these are the correct components, which are all easier to mount outside the case.",
+        computerQuizCRoom1.addAnswer("Computer/ComputerAnswer13",
+                "Computer/ComputerResponse13",
                 true
         );
         computerQuizCRoom1.setImage("Img/Computer6Small.png");
 
-        computerQuizCRoom2 = new CorrectQuizRoom("Why should you spend time on cable management?");
-        computerQuizCRoom2.addAnswer("It looks better and is more effective when showing off your new build",
-                "Proper cable management is not for showing off, but for airflow and to make future changes and repairs easier.",
+        computerQuizCRoom2 = new CorrectQuizRoom("Computer/ComputerQuestion2");
+        computerQuizCRoom2.addAnswer("Computer/ComputerAnswer21",
+                "Computer/ComputerResponse21",
                 false
 
         );
-        computerQuizCRoom2.addAnswer("It makes future changes and repairs easier, and also creates better airflow",
-                "Exactly, when problems arise in the future it will be easier to fix.",
+        computerQuizCRoom2.addAnswer("Computer/ComputerAnswer22",
+                "Computer/ComputerResponse22",
                 true
         );
-        computerQuizCRoom2.addAnswer("It's to ensure the cables won't interfere with each other and shortcircuit",
-                "All cables are already insulated, so it is highly unlikely that cables would interfere with each other.",
+        computerQuizCRoom2.addAnswer("Computer/ComputerAnswer23",
+                "Computer/ComputerResponse23",
                 false
         );
         computerQuizCRoom2.setImage("Img/Computer4Small.png");
