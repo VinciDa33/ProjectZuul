@@ -1,0 +1,14 @@
+Det kan være en god ide at lære at lodde basale komponenter sammen, siden det er en praktisk evne, som kan redde mange dele fra skraldespanden. At lode er lidt ligesom at svejse, men nemmere og mindre farligt, hvilket gør det muligt for de fleste at lodde i deres eget hjem.
+Når man lodder samler man permanent to dele eller elektroniske komponenter ved brug af en metal legering, kaldet lodde tin, lavet af hovedsageligt tin og kobber.
+
+Til en start skal du bruge:
+- Et lodde jern
+- Lodde tin
+- En lodde station
+~It could be a good idea to learn how to solder basic components since it is a versatile tool, which can save a lot of components from being thrown out. Soldering is a bit like welding, but easier and less dangerous, which means everyone is able to do so from home.
+When soldering you join two or more components or electronic parts together, using a metal alloy called 'solder', which is made of mostly tin and copper.
+
+To start you will need:
+- A soldering iron
+- Solder
+- Soldering station

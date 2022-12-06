@@ -1,0 +1,1 @@
+Strømforsyningen har ofte en specifik plads i kabinettet, så det skal aldrig monteres på bundkortet.~The power supply most often has a specific slot in the case itself, therefore it should never be mounted on the motherboard.

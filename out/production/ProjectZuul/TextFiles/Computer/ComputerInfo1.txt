@@ -1,0 +1,4 @@
+På dette mini-kursus vil du lære, hvordan du samler en computer og alle dens komponenter, lettest muligt.
+Når man bygger en computer er det lettest at samle flest muligt dele på bundkortet, før selve bundkortet installeres i computer kassen. Det kan godt lade sig gøre at installere bundkortet først, men det gør resten af processen sværerer, fordi der ikke er meget plads i kassen.
+~This room will teach you to assemble a computer with all parts of the PC in the easiest order.
+When building a computer it is easiest to assemble most of the components on the motherboard before mounting the motherboard in the case, however it is possible to mount the motherboard in the case beforehand, but it be more difficult with the limited space in the case.

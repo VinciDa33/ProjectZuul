@@ -1,0 +1,19 @@
+Først og fremmest skal du sikre at lodde jernets spids er skruet ordentligt fast.
+Tænd derefter for lodde stationen, og varm jernet op til omkring 400 grader.
+Hold de dele eller elektriske komponenter du vil lodde sammen mod hinanden.
+
+[SØRG FOR AT SLUKKE ALLE ELEKTRONISKE DELE FØRST]
+
+Varm selve samlingspunktet op med jernet, før du tilfører lodde tin. Når samlingen er varmet op skal tinnet smeltes direkte på samlingen, altså ikke på lodde jernet. Lad derefter tinnet køle og størkne. Du må ikke puste på tinnet, da det vil give en svagere samling.
+
+- Sådan, du har nu loddet 2 komponenter sammen.
+
+~Firstly make sure the soldering irons tip, is secured.
+Turn on the soldering station, and heat the iron to around 400C.
+Hold the electrical components you want to solder together.
+
+[TURN OFF ALL ELECTRICAL COMPONENTS FIRST]
+
+Heat up the joint before applying solder. When the joint is heated, melt the solder on the joint, not on the iron. Let the solder cool and solidify. Do not blow on the solder as it will make for a weaker joint.
+
+- All done, you have now soldered 2 components together

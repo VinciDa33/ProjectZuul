@@ -1,0 +1,1 @@
+Når man forbinder hardware (f.eks. et Grafikkort) til ens computer og derefter forbinder et strømkabel til den, er der så noget man skal være ekstra sikker på omkring? og hvorfor?~When connecting hardware (fx a graphics card) to your computer, and plugging in its power cables, are there anyhing you should be extra wary of? and why?

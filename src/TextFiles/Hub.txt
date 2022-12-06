@@ -1,0 +1,2 @@
+Dette er lærings hovedmenuen, vælg et mini-kursus eller tag den samlede test, og se og du kan huske, hvad ud har lært.
+~This is the learning hub, choose a course or take the combined test, to check what you learned across all courses.

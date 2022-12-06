@@ -1,0 +1,26 @@
+Trin 5:
+strømforsyningen (PSU) bliver monteret i bunden af kabinettet med blæseren, der vender væk fra kabinettet ved ventilationshullerne i kabinettet.
+Den bliver skruet på plads og kablerne bliver tilsluttet til strømforsyningen.
+
+Trin 6:
+Hvis man har nogen SATA harddiske, monterer man dem i harddiskpladserne i kabinettet og forbinder dem til strømforsyningen. SATA-kablerne bliver tilsluttet
+til bundkortet.
+
+Trin 7:
+Inden du monterer grafikkortet (GPU), vær sikker på at skrue bagpladerne på kabinettet af. Sænk grafikkortet ned i kabinettet og tilslut den i det øverste
+PCIe x16 slot (de lange slot, der går hen over bundkortet).
+
+Trin 8:
+Tilslut alle de korrekt kabler til de korrekt porte. Henvend dig til manualerne for at sikre dig, at du tilslætter de rigtige kabler og porte.
+Front I/O kablerne skal også tilsluttes til bundkortet. Det er de løser kabler, der hænger i toppen af kabinettet.
+~Step 5:
+The power supply (PSU) is mounted in the bottom of the case, with the fan on the power supply facing the ventilation holes on the case. It is screwed in place and the cables needed are plugged into the power supply.
+
+Step 6:
+Any SATA drives are mounted in the drive storage and connected to the power supply. The SATA data cables are connected to the motherboard.
+
+Step 7:
+Before mounting the GPU, make sure to unscrew the slot covers on the back of the case. Lower the GPU into the case and plug it into the top-most PCIe X16 slot (the long slots that go across the motherboard).
+
+Step 8:
+Plug all the correct cables into the correct ports. Make sure to check your manual to make sure you are using the correct cables and ports. The front I/O on the case needs to be plugged in to the motherboard as well. They will be the loose cables hanging from the top of the case.

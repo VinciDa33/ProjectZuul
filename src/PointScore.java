@@ -1,3 +1,5 @@
+import javafx.scene.media.AudioClip;
+
 public class PointScore {
     private static int points;
     public static void addPoints(int pointScore){
@@ -6,9 +8,5 @@ public class PointScore {
 
     public static int getPoints(){
         return points;
-    }
-
-    public static void printScore(){
-        System.out.println(points);
     }
 }

@@ -1,0 +1,24 @@
+Trin 1:
+Processoren (CPU) er monteret på bundkortet sammen med køleren. Være opmærksom på om kølepasta er påført på forhånd, hvis ikke påfør din egen kølepasta.
+
+Trin 2:
+Hukommelsen (RAM) er klikket på plads i RAM-slottet til højre for CPU-slottet. Når man monterer 2 RAM-pinde i et bundkort med 4 RAM-slot vær opmærksom
+på bundkortets manual på hvilke slot, RAM'en skal installeres i for at tillade for dobbelt kanal for den bedste ydeevne.
+
+Trin 3:
+Hvis man har nogen M.2 SSD'er monterer man dem i M.2 slottene på bundkortet og skruet på plads så SSD'et ligger fladt over bundkortet med en forhøjningskrue.
+
+Trin 4:
+Før man monterer bundkortet i kabinettet, skru alle forhøjningsskruer i kabinettet så de passer med hullerne på bundkortet. Monter I/O skjoldet, der kommer
+med bundkortet, hvis den ikke allerede er monteret på bundkortet. Bundkortet bliver placeret på forhøjningskruerne og skruet på plads.
+~Step 1:
+The CPU is mounted on the motherboard along with the CPU cooler. Be sure to check if thermal paste is pre-applied to the cooler, if not apply your own thermal paste." +
+
+Step 2:
+The RAM is clicked into place in the RAM slots to the right of the CPU slot. When mounting 2 RAM sticks in a motherboard with 4 RAM slots, be sure to check the motherboard manual for the correct RAM slots to allow for dual channel for the best performance." +
+
+Step 3:
+Any M.2 SSDs are mounted in the M.2 slots on the motherboard and screwed in place, so the SSD is laying flat above the board with a standoff screw.
+
+Step 4:
+Before mounting the motherboard in the case, make sure to screw in any standoff screws in the case, so that they line up with the holes on the motherboard. Mount the I/O shield that comes with the motherboard if it is not pre-attached to the motherboard. The motherboard is then placed on the standoffs and screwed into place.
