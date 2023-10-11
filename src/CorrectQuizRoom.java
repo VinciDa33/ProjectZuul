@@ -10,7 +10,6 @@ public class CorrectQuizRoom extends QuizRoom{
         super(roomDataPath);
     }
 
-
     public void addAnswer(String answer, String response, boolean isCorrect){
         answers.add(answer);
         responses.add(response);

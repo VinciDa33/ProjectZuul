@@ -11,11 +11,9 @@ public abstract class Room {
     public Room(String roomDataPath) {
         this.roomDataPath = roomDataPath;
     }
-
     public void setExit(String key, Room room){
         exits.put(key,room);
     }
-
     public abstract void onEnterRoom();
 
     //REPLACED BY GUI - EVENT BASED EXECUTION
@@ -26,6 +24,5 @@ public abstract class Room {
     public void setImage(String imageString) {
         this.imageString = imageString;
     }
-
-
 }
+

@@ -31,8 +31,6 @@ public class GameManager {
         PointQuizRoom test1, test2, test3, test4;
 
 
-
-
         pointScoreRoom = new InfoRoom("Default Statement");
         pointScoreRoom.setImage("Img/Full2.png");
         pointScoreRoom.setPointScoreRoom(true);
